@@ -1,8 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class CreateUserController with ChangeNotifier {
+class CreateUserController extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   CreateUserController();
@@ -13,8 +14,6 @@ class CreateUserController with ChangeNotifier {
   void attemptToRegisterUser(BuildContext context) {
     print('attemptToRegisterUser user . . .');
     errMessage = '';
-    // showLoading = true;
-    // notifyListeners();
 
     if (usernameController.text.trim().isNotEmpty &&
         !usernameController.text.trim().contains(" ") &&
@@ -22,7 +21,7 @@ class CreateUserController with ChangeNotifier {
         !passwordController.text.trim().contains(" ")) {
       print('Registering user . . .');
       errMessage = '';
-      notifyListeners();
+      update();
       registerUser(
         context,
         usernameController.text.trim(),
@@ -30,7 +29,7 @@ class CreateUserController with ChangeNotifier {
     } else {
       errMessage = 'All fields must be filled, and with no spaces';
       print("Errormessage: $errMessage");
-      notifyListeners();
+      update();
     }
   }
 

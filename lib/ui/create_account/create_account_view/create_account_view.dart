@@ -3,7 +3,9 @@
 import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:own_the_city/ui/auth_create_account/auth_create_controller/auth_create_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:own_the_city/ui/create_account/create_account_controller/create_account_controller.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
 import 'package:own_the_city/ui/shared/custom_textfield%20copy.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
@@ -14,7 +16,8 @@ import 'package:own_the_city/utils/screen_util/screen_util.dart';
 class CreateAccountView extends StatelessWidget {
   CreateAccountView({super.key});
 
-  final CreateUserController controller = CreateUserController();
+  // final CreateUserController controller = CreateUserController();
+  final controller = Get.put(CreateUserController());
   bool check = false;
 
   @override
@@ -54,10 +57,14 @@ class CreateAccountView extends StatelessWidget {
               ),
               CustomSpacer(20),
               Center(
-                child: Text(
-                  controller.errMessage,
-                  style: const TextStyle(color: Colors.red),
-                ),
+                child: GetBuilder<CreateUserController>(
+                    init: CreateUserController(),
+                    builder: (_) {
+                      return Text(
+                        controller.errMessage,
+                        style: const TextStyle(color: Colors.red),
+                      );
+                    }),
               ),
               CustomSpacer(50),
               Center(
@@ -76,13 +83,17 @@ class CreateAccountView extends StatelessWidget {
                 ),
               ),
               CustomSpacer(50),
-              Center(
-                child: controller.showLoading == true
-                    ? Platform.isAndroid
-                        ? const CircularProgressIndicator()
-                        : const CupertinoActivityIndicator()
-                    : const SizedBox.shrink(),
-              ),
+              GetBuilder<CreateUserController>(
+                  init: CreateUserController(),
+                  builder: (_) {
+                    return Center(
+                      child: controller.showLoading == true
+                          ? Platform.isAndroid
+                              ? const CircularProgressIndicator()
+                              : const CupertinoActivityIndicator()
+                          : const SizedBox.shrink(),
+                    );
+                  }),
             ],
           ),
         ),
