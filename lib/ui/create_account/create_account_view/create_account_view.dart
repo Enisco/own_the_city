@@ -15,7 +15,6 @@ import 'package:own_the_city/utils/screen_util/screen_util.dart';
 class CreateAccountView extends StatelessWidget {
   CreateAccountView({super.key});
 
-  // final CreateUserController controller = CreateUserController();
   final controller = Get.put(CreateUserController());
   bool check = false;
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "470200772818",
+    "project_id": "own-the-city",
+    "storage_bucket": "own-the-city.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470200772818:android:5dd4ff11efcadc0589650b",
+        "android_client_info": {
+          "package_name": "com.example.own_the_city"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470200772818-do4ds91f8hofbvgcoq0ungt1dh95uq6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXYL_EKQM4ycOesyiKgN-EV0Io7fqWmHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470200772818-do4ds91f8hofbvgcoq0ungt1dh95uq6m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
