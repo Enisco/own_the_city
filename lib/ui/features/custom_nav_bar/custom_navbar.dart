@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:own_the_city/ui/features/custom_nav_bar/data/page_index_class.dart';
+import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
@@ -58,7 +58,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   color: Provider.of<CurrentPage>(context, listen: false)
                               .currentPageIndex ==
                           0
-                      ? AppColors.deepBlueGray
+                      ? AppColors.kPrimaryColor
                       : AppColors.transparent,
                 ),
                 padding: EdgeInsets.symmetric(
@@ -133,7 +133,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   color: Provider.of<CurrentPage>(context, listen: false)
                               .currentPageIndex ==
                           1
-                      ? AppColors.deepBlueGray
+                      ? AppColors.kPrimaryColor
                       : AppColors.transparent,
                 ),
                 padding: EdgeInsets.symmetric(
@@ -147,7 +147,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SvgPicture.asset(
-                           'assets/icons/search.svg',
+                      'assets/icons/search.svg',
                       height: 20,
                       width: 20,
                       color: Provider.of<CurrentPage>(context, listen: false)
@@ -189,8 +189,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
                   print('currentPageIndexCheck: $currentPageIndexCheck');
                   currentPageIndexCheck == true
-                      ? context.push('/createContestPageOne')
-                      : context.pushReplacement('/createContestPageOne');
+                      ? context.push('/createFeedPageOne')
+                      : context.pushReplacement('/createFeedPageOne');
                 } else {
                   print('You are already in ProfilePageView');
                 }
@@ -208,7 +208,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   color: Provider.of<CurrentPage>(context, listen: false)
                               .currentPageIndex ==
                           2
-                      ? AppColors.deepBlueGray
+                      ? AppColors.kPrimaryColor
                       : AppColors.transparent,
                 ),
                 padding: EdgeInsets.symmetric(
@@ -222,7 +222,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
-                       CupertinoIcons.plus_app,
+                      CupertinoIcons.plus_app,
                       color: Provider.of<CurrentPage>(context, listen: false)
                                   .currentPageIndex ==
                               2
@@ -282,7 +282,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   color: Provider.of<CurrentPage>(context, listen: false)
                               .currentPageIndex ==
                           3
-                      ? AppColors.deepBlueGray
+                      ? AppColors.kPrimaryColor
                       : AppColors.transparent,
                 ),
                 padding: EdgeInsets.symmetric(
@@ -296,7 +296,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
-                       Icons.leaderboard_outlined,
+                      Icons.leaderboard_outlined,
                       color: Provider.of<CurrentPage>(context, listen: false)
                                   .currentPageIndex ==
                               3

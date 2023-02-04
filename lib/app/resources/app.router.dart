@@ -3,24 +3,25 @@
 import 'package:go_router/go_router.dart';
 import 'package:own_the_city/app/resources/app.transitions.dart';
 import 'package:own_the_city/app/services/navigation_service.dart';
-import 'package:own_the_city/ui/features/homepage/presentation/views/homepage.dart';
+import 'package:own_the_city/ui/features/homepage/views/homepage.dart';
 import 'package:own_the_city/ui/features/record_screen/view/record_view.dart';
-import 'package:own_the_city/ui/features/splash_screen/presentation/views/splash_screen.dart';
+import 'package:own_the_city/ui/features/splash_screen/splash_screen.dart';
+import 'package:own_the_city/ui/shared/animated_icon.dart';
 
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationService.navigatorKey,
     initialLocation: '/',
-    // initialLocation: '/homepageView',
+    // initialLocation: '/customAnimatedIcon',
     routes: [
       GoRoute(
         path: '/',
         builder: (context, state) => const SplashScreen(),
       ),
-      // GoRoute(
-      //   path: '/testScreen',
-      //   builder: (context, state) => const TestScreen(),
-      // ),
+      GoRoute(
+        path: '/customAnimatedIcon',
+        builder: (context, state) => const CustomAnimatedIcon(),
+      ),
 
       /// App Pages
       /// 

@@ -6,8 +6,8 @@ import 'package:equatable/equatable.dart';
 class DemoModel extends Equatable {
   File? coverPictureFile;
   String? coverpictureLink;
-  String? contestName;
-  String? contestDescription;
+  String? feedName;
+  String? feedDescription;
   DateTime? startingDayAndTime;
   DateTime? endingDayAndTime;
   int? maxNumber;
@@ -17,8 +17,8 @@ class DemoModel extends Equatable {
   DemoModel({
     this.coverPictureFile,
     this.coverpictureLink,
-    this.contestName,
-    this.contestDescription,
+    this.feedName,
+    this.feedDescription,
     this.startingDayAndTime,
     this.endingDayAndTime,
     this.maxNumber,
@@ -29,8 +29,8 @@ class DemoModel extends Equatable {
   DemoModel copyWith({
     coverPictureFile,
     coverpictureLink,
-    contestName,
-    contestDescription,
+    feedName,
+    feedDescription,
     startingDayAndTime,
     endingDayAndTime,
     maxNumber,
@@ -40,8 +40,8 @@ class DemoModel extends Equatable {
       DemoModel(
         coverPictureFile: coverPictureFile ?? this.coverPictureFile,
         coverpictureLink: coverpictureLink ?? this.coverpictureLink,
-        contestName: contestName ?? this.contestName,
-        contestDescription: contestDescription ?? this.contestDescription,
+        feedName: feedName ?? this.feedName,
+        feedDescription: feedDescription ?? this.feedDescription,
         startingDayAndTime: startingDayAndTime ?? this.startingDayAndTime,
         endingDayAndTime: endingDayAndTime ?? this.endingDayAndTime,
         maxNumber: maxNumber ?? this.maxNumber,
@@ -53,8 +53,8 @@ class DemoModel extends Equatable {
   List<Object?> get props => [
         coverPictureFile,
         coverpictureLink,
-        contestName,
-        contestDescription,
+        feedName,
+        feedDescription,
         startingDayAndTime,
         endingDayAndTime,
         maxNumber,

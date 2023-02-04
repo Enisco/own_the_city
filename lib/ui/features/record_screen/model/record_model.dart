@@ -27,7 +27,7 @@ class RecordToponymModel with ChangeNotifier {
       maxWidth: 1800,
       maxHeight: 1800,
     );
-    if (selectedImages != null) {
+    if (selectedImages.isNotEmpty) {
       imageFilesSelected.addAll(selectedImages);
       notifyListeners();
       print("Image List Length:${imageFilesSelected.length}");

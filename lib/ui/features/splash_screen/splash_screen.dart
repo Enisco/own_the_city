@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
-import 'package:own_the_city/ui/features/custom_nav_bar/data/page_index_class.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
