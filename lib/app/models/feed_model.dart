@@ -6,7 +6,7 @@ class FeedModel extends Equatable {
   String? feedCoverPictureLink;
   String? feedName;
   String? feedDescription;
-  int? upvotes;
+  int? thumbsUp;
   String? username;
   String? userProfilePicsLink;
   bool? upvoted;
@@ -16,7 +16,7 @@ class FeedModel extends Equatable {
     this.feedName,
     this.feedDescription,
     this.username,
-    this.upvotes,
+    this.thumbsUp,
     this.userProfilePicsLink,
     this.upvoted,
   });
@@ -25,7 +25,7 @@ class FeedModel extends Equatable {
     feedCoverPictureLink,
     feedName,
     feedDescription,
-    upvotes,
+    thumbsUp,
     username,
     userProfilePicsLink,
     upvoted,
@@ -34,7 +34,7 @@ class FeedModel extends Equatable {
         feedCoverPictureLink: feedCoverPictureLink ?? feedCoverPictureLink,
         feedName: feedName ?? feedName,
         feedDescription: feedDescription ?? feedDescription,
-        upvotes: upvotes ?? upvotes,
+        thumbsUp: thumbsUp ?? thumbsUp,
         username: username ?? username,
         userProfilePicsLink: userProfilePicsLink ?? userProfilePicsLink,
         upvoted: upvoted ?? upvoted,
@@ -45,7 +45,7 @@ class FeedModel extends Equatable {
         feedCoverPictureLink,
         feedName,
         feedDescription,
-        upvotes,
+        thumbsUp,
         username,
         userProfilePicsLink,
         upvoted,

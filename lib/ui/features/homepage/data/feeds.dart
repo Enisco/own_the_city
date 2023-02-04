@@ -17,7 +17,7 @@ FeedModel sampleFeedData4 = FeedModel(
   feedName: 'Best Actress of the year',
   feedDescription:
       "The Ballon d'Or is an annual football award presented by French news magazine France Football since 1956. Between 2010 and 2015, in an agreement with FIFA, the award was temporarily merged with the FIFA World Player of the Year and known as the FIFA Ballon d'Or.",
-  upvotes: 56,
+  thumbsUp: 56,
   upvoted: true,
 );
 
@@ -30,7 +30,7 @@ FeedModel sampleFeedData1 = FeedModel(
   feedName: 'Best Car Driver',
   feedDescription:
       "The Ballon d'Or is an annual football award presented by French news magazine France Football since 1956. Between 2010 and 2015, in an agreement with FIFA, the award was temporarily merged with the FIFA World Player of the Year and known as the FIFA Ballon d'Or.",
-  upvotes: 56,
+  thumbsUp: 56,
   upvoted: false,
 );
 
@@ -43,7 +43,7 @@ FeedModel sampleFeedData2 = FeedModel(
   feedName: 'Fashion Galore',
   feedDescription:
       "The Ballon d'Or is an annual football award presented by French news magazine France Football since 1956. Between 2010 and 2015, in an agreement with FIFA, the award was temporarily merged with the FIFA World Player of the Year and known as the FIFA Ballon d'Or.",
-  upvotes: 56,
+  thumbsUp: 56,
   upvoted: true,
 );
 
@@ -56,7 +56,7 @@ FeedModel sampleFeedData3 = FeedModel(
   feedName: 'Model of the year',
   feedDescription:
       "The Ballon d'Or is an annual football award presented by French news magazine France Football since 1956. Between 2010 and 2015, in an agreement with FIFA, the award was temporarily merged with the FIFA World Player of the Year and known as the FIFA Ballon d'Or.",
-  upvotes: 563,
+  thumbsUp: 563,
   upvoted: true,
 );
 
@@ -69,6 +69,6 @@ FeedModel sampleFeedData0 = FeedModel(
   feedName: 'GOAT Challenge',
   feedDescription:
       "The Ballon d'Or is an annual football award presented by French news magazine France Football since 1956. Between 2010 and 2015, in an agreement with FIFA, the award was temporarily merged with the FIFA World Player of the Year and known as the FIFA Ballon d'Or.",
-  upvotes: 1036,
+  thumbsUp: 1036,
   upvoted: true,
 );

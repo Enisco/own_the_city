@@ -1,14 +1,13 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:own_the_city/app/models/feed_model.dart';
-import 'package:own_the_city/ui/features/homepage/views/widgets/custom_readmore.dart';
-import 'package:own_the_city/ui/shared/animated_icon.dart';
+import 'package:own_the_city/ui/features/homepage/views/widgets/animated_icon.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
-import 'package:flutter/cupertino.dart';
 
 class FeedsCard extends StatefulWidget {
   FeedsCard({super.key, required this.feedData});
@@ -97,34 +96,52 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
           CustomSpacer(5),
           Row(
             children: [
-              const CustomAnimatedIcon(),
+              CustomAnimatedIcon(
+                onPressed: (() {
+                  print("object");
+                }),
+              ),
               const SizedBox(width: 4),
-              Text(
-                '${widget.feedData?.upvotes} upvotes',
-                style: AppStyles.regularStringStyle(12, AppColors.black),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomSpacer(3),
+                  Text(
+                    '${widget.feedData?.thumbsUp} thumbsUp',
+                    style: AppStyles.regularStringStyle(12, AppColors.black),
+                  ),
+                ],
               ),
             ],
           ),
-          CustomSpacer(5),
-          SizedBox(
-            height: 35,
-            width: screenSize(context).width - 10,
-            child: CustomReadMoreText(
+          // CustomSpacer(5),
+          ExpandablePanel(
+            header: Text(
+              '${widget.feedData?.feedName}',
+              style: AppStyles.regularStringStyle(14, AppColors.black),
+            ),
+            collapsed: Text(
               '${widget.feedData?.feedDescription}',
-              trimLines: 2,
-              colorClickableText: Colors.pink,
-              trimMode: TrimMode.line,
-              trimCollapsedText: ' More',
-              trimExpandedText: 'Show less',
-              style: AppStyles.regularStringStyle(
-                      12, AppColors.fullBlack.withOpacity(0.4))
-                  .copyWith(fontWeight: FontWeight.w500),
-              moreStyle: AppStyles.floatingHintStringStyleColored(
-                12,
-                AppColors.darkGray,
-              ),
+              softWrap: true,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            expanded: Text(
+              '${widget.feedData?.feedDescription}',
+              softWrap: true,
+            ),
+            theme: ExpandableThemeData(
+              iconPadding: const EdgeInsets.only(top: 0),
+              iconColor: AppColors.kPrimaryColor,
+              tapBodyToCollapse: true,
+              tapBodyToExpand: true,
+              tapHeaderToExpand: true,
+              iconSize: 35,
+              headerAlignment: ExpandablePanelHeaderAlignment.center,
+              iconPlacement: ExpandablePanelIconPlacement.right,
             ),
           ),
+          CustomSpacer(10),
         ],
       ),
     );

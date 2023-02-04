@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/features/homepage/data/feeds.dart';
-import 'package:own_the_city/ui/shared/feeds_card.dart';
+import 'package:own_the_city/ui/features/homepage/views/widgets/feeds_card.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
