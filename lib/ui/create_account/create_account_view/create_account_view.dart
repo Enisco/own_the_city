@@ -4,7 +4,6 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:own_the_city/ui/create_account/create_account_controller/create_account_controller.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
 import 'package:own_the_city/ui/shared/custom_textfield%20copy.dart';
