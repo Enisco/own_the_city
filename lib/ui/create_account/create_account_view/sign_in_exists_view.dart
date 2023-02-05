@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:own_the_city/ui/create_account/create_account_controller/create_account_controller.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
-import 'package:own_the_city/ui/shared/custom_textfield%20copy.dart';
+import 'package:own_the_city/ui/shared/custom_textfield_.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';

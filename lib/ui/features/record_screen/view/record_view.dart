@@ -15,7 +15,6 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
-// import 'package:provider/provider.dart';
 
 var log = getLogger('RecordPageView');
 
@@ -28,7 +27,6 @@ class RecordPageView extends StatefulWidget {
 
 class _RecordPageViewState extends State<RecordPageView> {
   final _controller = Get.put(RecordToponymController());
-  var selectedToponymTypes = ToponymTypes.Natural;
 
   @override
   void initState() {
@@ -203,7 +201,7 @@ class _RecordPageViewState extends State<RecordPageView> {
                             topPadding: 14,
                             fillColor: AppColors.regularBlue,
                             textEditingController:
-                                _controller.toponymController,
+                                _controller.toponymNameController,
                             labelText: 'What is the name?',
                             textInputAction: TextInputAction.next,
                           ),
@@ -242,31 +240,33 @@ class _RecordPageViewState extends State<RecordPageView> {
                             ),
                           ),
                           ListTile(
-                            onTap: () => setState(() {
-                              log.w(selectedToponymTypes);
-                              selectedToponymTypes = ToponymTypes.Natural;
-                              log.wtf(selectedToponymTypes);
-                            }),
+                            onTap: () {
+                              log.w(_controller.selectedToponymTypes);
+                              _controller.selectedToponymTypes =
+                                  ToponymTypes.Natural;
+                              log.wtf(_controller.selectedToponymTypes);
+                            },
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 5, vertical: 0),
                             title: Text(ToponymTypes.Natural.name.toString()),
                             leading: Radio(
                               value: ToponymTypes.Natural,
-                              groupValue: selectedToponymTypes,
+                              groupValue: _controller.selectedToponymTypes,
                               onChanged: (natural) {
                                 setState(() {
-                                  log.w(selectedToponymTypes);
-                                  selectedToponymTypes = ToponymTypes.Natural;
-                                  log.wtf(selectedToponymTypes);
+                                  log.w(_controller.selectedToponymTypes);
+                                  _controller.selectedToponymTypes =
+                                      ToponymTypes.Natural;
+                                  log.wtf(_controller.selectedToponymTypes);
                                 });
                               },
                             ),
                           ),
                           ListTile(
                             onTap: () => setState(() {
-                              log.w(selectedToponymTypes);
-                              selectedToponymTypes = ToponymTypes.Artificial;
-                              log.wtf(selectedToponymTypes);
+                              log.w(_controller.selectedToponymTypes);
+                              _controller.selectedToponymTypes = ToponymTypes.Artificial;
+                              log.wtf(_controller.selectedToponymTypes);
                             }),
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 5, vertical: 0),
@@ -274,13 +274,13 @@ class _RecordPageViewState extends State<RecordPageView> {
                                 Text(ToponymTypes.Artificial.name.toString()),
                             leading: Radio(
                               value: ToponymTypes.Artificial,
-                              groupValue: selectedToponymTypes,
+                              groupValue: _controller.selectedToponymTypes,
                               onChanged: (artificial) {
                                 setState(() {
-                                  log.w(selectedToponymTypes);
-                                  selectedToponymTypes =
+                                  log.w(_controller.selectedToponymTypes);
+                                  _controller.selectedToponymTypes =
                                       ToponymTypes.Artificial;
-                                  log.wtf(selectedToponymTypes);
+                                  log.wtf(_controller.selectedToponymTypes);
                                 });
                               },
                             ),

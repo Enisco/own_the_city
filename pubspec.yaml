@@ -33,6 +33,7 @@ dependencies:
   get: ^4.6.5
   intl: ^0.18.0
   carousel_slider: ^4.2.1
+  country_state_city_picker: ^1.2.8
 
 dev_dependencies:
   flutter_test:

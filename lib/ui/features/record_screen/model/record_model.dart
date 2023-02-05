@@ -2,7 +2,6 @@
 //
 //     final recordToponymModel = recordToponymModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 RecordToponymModel recordToponymModelFromJson(String str) =>

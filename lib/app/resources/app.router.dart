@@ -8,12 +8,15 @@ import 'package:own_the_city/ui/features/homepage/views/homepage.dart';
 import 'package:own_the_city/ui/features/record_screen/view/record_view.dart';
 import 'package:own_the_city/ui/features/splash_screen/splash_screen.dart';
 
+import '../../ui/create_account/create_account_view/update_account_view.dart';
+
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationService.navigatorKey,
     // initialLocation: '/recordPageView',
     // initialLocation: '/createAccountView',
-    initialLocation: '/homepageView',
+    initialLocation: '/updateNewAccountView',
+    // initialLocation: '/homepageView',
     routes: [
       GoRoute(
         path: '/',
@@ -45,6 +48,10 @@ class AppRouter {
       GoRoute(
         path: '/signInUserView',
         builder: (context, state) => SignInUserView(),
+      ),
+      GoRoute(
+        path: '/updateNewAccountView',
+        builder: (context, state) => UpdateNewAccountView(),
       ),
 
       GoRoute(

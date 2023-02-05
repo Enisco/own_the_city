@@ -27,7 +27,8 @@ class CustomAnimatedIconState extends State<CustomAnimatedIcon> {
         context,
         Text('You gave ${widget.posterUsername} a thumb up'),
         () {},
-        AppColors.kPrimaryColor,);
+        AppColors.kPrimaryColor,
+        500);
   }
 
   @override

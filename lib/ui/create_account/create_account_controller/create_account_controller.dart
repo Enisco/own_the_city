@@ -1,11 +1,14 @@
 // ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:own_the_city/app/helpers/sharedprefs.dart';
 import 'package:own_the_city/app/services/snackbar_service.dart';
 import 'package:own_the_city/ui/create_account/create_account_model/create_account_model.dart';
@@ -17,11 +20,22 @@ class CreateUserController extends GetxController {
   CreateUserController();
 
   bool showLoading = false;
-  String errMessage = '', userExisting = ' ';
+  String errMessage = '',
+      userExisting = ' ',
+      countrySelected = ' ',
+      stateSelected = ' ',
+      citySelected = ' ';
+
+  File? imageFile;
+  String? imageUrl;
 
   void resetValues() {
     errMessage = "";
     showLoading = false;
+    update();
+  }
+
+  updateVals() {
     update();
   }
 
@@ -139,7 +153,11 @@ class CreateUserController extends GetxController {
   Future<void> registerUser(BuildContext context) async {
     UserAccountModel createAccountData = UserAccountModel()
       ..username = usernameController.text.trim()
-      ..password = passwordController.text.trim();
+      ..password = passwordController.text.trim()
+      ..totalPoints = 0
+      ..totalToponymsRecorded = 0
+      ..naturalToponymsRecorded = 0
+      ..artificialToponymsRecorded = 0;
 
     DatabaseReference ref = FirebaseDatabase.instance
         .ref("user_details/${createAccountData.username}");
@@ -150,12 +168,75 @@ class CreateUserController extends GetxController {
         .set(createAccountData.toJson())
         .whenComplete(
           () => showCustomSnackBar(
-            context,
-            "User ${usernameController.text.trim()} created",
-            () {},
-            Colors.green,
-          ),
+              context,
+              "User ${usernameController.text.trim()} created",
+              () {},
+              Colors.green,
+              1000),
         )
         .whenComplete(() => gotoHomepage(context));
+  }
+
+  /// Upload image from gallery
+  getFromGallery() async {
+    XFile? pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+      update();
+    }
+  }
+
+  /// Snap image with Camera
+  getFromCamera() async {
+    XFile? pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+      update();
+    }
+  }
+
+  Future<void> updateNewUserData(BuildContext context) async {
+    if (countrySelected != ' ' &&
+        stateSelected != ' ' &&
+        citySelected != ' ' &&
+        imageFile != null) {
+      /// Upload image to cloud storage
+      final firebaseStorage = FirebaseStorage.instance;
+      var file = File(imageFile!.path);
+      var snapshot = await firebaseStorage
+          .ref()
+          .child(
+              'own_the_city/user_profile_images/${GlobalVariables.myUsername}')
+          .putFile(file)
+          .whenComplete(
+            () => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text(
+                  'Great! Image uploaded',
+                  style: TextStyle(color: Colors.amber),
+                ),
+                backgroundColor: Colors.green[800],
+                action: SnackBarAction(
+                  label: '',
+                  onPressed: () {
+                    // Do nothing!
+                  },
+                ),
+              ),
+            ),
+          );
+
+      /// Generate download
+      var downloadUrl = await snapshot.ref.getDownloadURL();
+      imageUrl = downloadUrl;
+    }
   }
 }
