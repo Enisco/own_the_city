@@ -231,22 +231,37 @@ class CreateUserController extends GetxController {
       var downloadUrl = await snapshot.ref.getDownloadURL();
       imageUrl = downloadUrl;
 
-      UserAccountModel createAccountData = UserAccountModel()
-        ..city = citySelected
-        ..country = countrySelected
-        ..profileImageLink = imageUrl;
+      UserAccountModel updateAccountData = UserAccountModel();
+
+      final getDataRef = FirebaseDatabase.instance.ref();
+      final getDataSnapshot = await getDataRef
+          .child('user_details/${usernameController.text.trim()}')
+          .get();
+      if (getDataSnapshot.exists) {
+        print("User exists: ${getDataSnapshot.value}");
+        UserAccountModel userAccountModel = userAccountModelFromJson(
+            jsonEncode(getDataSnapshot.value).toString());
+        userAccountModel.copyWith(
+            city: citySelected,
+            country: countrySelected,
+            profileImageLink: imageUrl);
+
+        updateAccountData = userAccountModel;
+        update();
+      }
+      log.wtf("updateAccountData: ${updateAccountData.toJson()}");
 
       DatabaseReference ref = FirebaseDatabase.instance
           .ref("user_details/${GlobalVariables.myUsername}");
 
-      print(createAccountData.toJson());
+      print(updateAccountData.toJson());
 
       await ref
-          .update(createAccountData.toJson())
+          .update(updateAccountData.toJson())
           .whenComplete(
             () => showCustomSnackBar(
                 context,
-                "User ${usernameController.text.trim()} created",
+                "User ${usernameController.text.trim()} updated",
                 () {},
                 Colors.green,
                 1000),
