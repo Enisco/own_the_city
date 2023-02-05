@@ -40,8 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         log.wtf('Animation completed');
         sleep(const Duration(milliseconds: 200));
-        context.pushReplacement('/homepageView');
-        // context.pushReplacement('/recordPageView');
+        context.pushReplacement('/createAccountView');
       }
     });
   }

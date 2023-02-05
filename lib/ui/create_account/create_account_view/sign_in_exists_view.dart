@@ -2,7 +2,6 @@
 
 import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:own_the_city/ui/create_account/create_account_controller/create_account_controller.dart';
@@ -13,8 +12,8 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
-class CreateAccountView extends StatelessWidget {
-  CreateAccountView({super.key});
+class SignInExistingUserView extends StatelessWidget {
+  SignInExistingUserView({super.key});
 
   final controller = Get.put(CreateUserController());
 
@@ -27,7 +26,7 @@ class CreateAccountView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.kPrimaryColor,
         title: const Text(
-          "Create Account",
+          "Sign In",
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -36,16 +35,18 @@ class CreateAccountView extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(50),
         child: SizedBox(
           height: size.height,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomTextfield(
-                textEditingController: controller.usernameController,
-                labelText: 'Username',
-                hintText: 'Enter your preferred username',
+              Text(
+                "User with username ${controller.userExisting} already exists. Enter your password to continue.",
+                style: AppStyles.regularStringStyle(
+                  14,
+                  AppColors.black,
+                ),
               ),
               CustomSpacer(20),
               CustomTextfield(
@@ -56,50 +57,31 @@ class CreateAccountView extends StatelessWidget {
               CustomSpacer(20),
               Center(
                 child: GetBuilder<CreateUserController>(
-                    init: CreateUserController(),
-                    builder: (_) {
-                      return Text(
-                        controller.errMessage,
-                        style: const TextStyle(color: Colors.red),
-                      );
-                    }),
+                  init: CreateUserController(),
+                  builder: (_) {
+                    return Text(
+                      controller.errMessage,
+                      style: const TextStyle(color: Colors.red),
+                    );
+                  },
+                ),
               ),
               CustomSpacer(50),
-              CustomButton(
-                styleBoolValue: true,
-                height: 55,
-                width: screenSize(context).width * 0.6,
-                color: Colors.amber[600],
-                child: Text(
-                  'Create Account',
-                  style: AppStyles.regularStringStyle(18, AppColors.plainWhite),
-                ),
-                onPressed: () {
-                  controller.attemptToRegisterUser(context);
-                },
-              ),
-              CustomSpacer(12),
-              RichText(
-                textScaleFactor: 1,
-                text: TextSpan(
-                  text: 'Already have an account? ',
-                  style: TextStyle(
-                    color: AppColors.black,
+              Center(
+                child: CustomButton(
+                  styleBoolValue: true,
+                  height: 55,
+                  width: screenSize(context).width * 0.6,
+                  color: Colors.amber[600],
+                  child: Text(
+                    'Sign in',
+                    style:
+                        AppStyles.regularStringStyle(18, AppColors.plainWhite),
                   ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Sign in here',
-                      style: AppStyles.regularStringStyle(
-                        14,
-                        AppColors.kPrimaryColor,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          
-                          controller.gotoSignInPage(context);
-                        },
-                    ),
-                  ],
+                  onPressed: () {
+                    print('Going to sign in page');
+                    controller.attemptToRegisterUser(context);
+                  },
                 ),
               ),
               CustomSpacer(50),
