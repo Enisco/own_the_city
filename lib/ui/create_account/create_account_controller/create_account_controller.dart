@@ -241,10 +241,15 @@ class CreateUserController extends GetxController {
         print("User exists: ${getDataSnapshot.value}");
         UserAccountModel userAccountModel = userAccountModelFromJson(
             jsonEncode(getDataSnapshot.value).toString());
-        userAccountModel.copyWith(
-            city: citySelected,
-            country: countrySelected,
-            profileImageLink: imageUrl);
+        userAccountModel
+          ..city = citySelected
+          ..country = countrySelected
+          ..profileImageLink = imageUrl;
+        // userAccountModel.copyWith(
+        //     city: citySelected,
+        //     country: countrySelected,
+        //     profileImageLink: imageUrl);
+        log.w("userAccountModel: ${userAccountModel.toJson()}");
 
         updateAccountData = userAccountModel;
         update();
