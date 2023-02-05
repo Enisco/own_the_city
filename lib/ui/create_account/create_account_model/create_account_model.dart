@@ -22,7 +22,7 @@ class UserAccountModel extends Equatable {
     this.artificialToponymsRecorded,
     this.profileImageLink,
     this.city,
-    this.state,
+    this.country,
   });
 
   String? username;
@@ -33,7 +33,7 @@ class UserAccountModel extends Equatable {
   int? artificialToponymsRecorded;
   String? profileImageLink;
   String? city;
-  String? state;
+  String? country;
 
   UserAccountModel copyWith({
     String? username,
@@ -44,7 +44,7 @@ class UserAccountModel extends Equatable {
     int? artificialToponymsRecorded,
     String? profileImageLink,
     String? city,
-    String? state,
+    String? country,
   }) =>
       UserAccountModel(
         username: username ?? this.username,
@@ -58,7 +58,7 @@ class UserAccountModel extends Equatable {
             artificialToponymsRecorded ?? this.artificialToponymsRecorded,
         profileImageLink: profileImageLink ?? this.profileImageLink,
         city: city ?? this.city,
-        state: state ?? this.state,
+        country: country ?? this.country,
       );
 
   factory UserAccountModel.fromJson(Map<String, dynamic> json) =>
@@ -71,7 +71,7 @@ class UserAccountModel extends Equatable {
         artificialToponymsRecorded: json["artificialToponymsRecorded"],
         profileImageLink: json["profileImageLink"],
         city: json["city"],
-        state: json["state"],
+        country: json["country"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -83,7 +83,7 @@ class UserAccountModel extends Equatable {
         "artificialToponymsRecorded": artificialToponymsRecorded,
         "profileImageLink": profileImageLink,
         "city": city,
-        "state": state,
+        "country": country,
       };
 
   @override
@@ -96,6 +96,6 @@ class UserAccountModel extends Equatable {
         artificialToponymsRecorded,
         profileImageLink,
         city,
-        state,
+        country,
       ];
 }

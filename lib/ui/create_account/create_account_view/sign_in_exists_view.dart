@@ -35,7 +35,7 @@ class SignInExistingUserView extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(50),
         child: SizedBox(
           height: size.height,

@@ -10,9 +10,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:own_the_city/app/helpers/sharedprefs.dart';
+import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/app/services/snackbar_service.dart';
 import 'package:own_the_city/ui/create_account/create_account_model/create_account_model.dart';
 import 'package:own_the_city/ui/shared/global_variables.dart';
+
+var log = getLogger('CreateUserController');
 
 class CreateUserController extends GetxController {
   TextEditingController usernameController = TextEditingController();
@@ -48,8 +51,6 @@ class CreateUserController extends GetxController {
   void gotoHomepage(BuildContext context) async {
     await saveSharedPrefsStringValue(
         "username", usernameController.text.trim());
-    GlobalVariables.myUsername = usernameController.text.trim();
-    print("GlobalVariables.myUsername: ${GlobalVariables.myUsername}");
     print('Going to homepage page');
     resetValues();
     context.go('/homepageView');
@@ -90,7 +91,9 @@ class CreateUserController extends GetxController {
       if (userAccountModel.password == passwordController.text.trim()) {
         showLoading = false;
         update();
-        gotoHomepage(context);
+        GlobalVariables.myUsername = usernameController.text.trim();
+        print("GlobalVariables.myUsername: ${GlobalVariables.myUsername}");
+        context.pushReplacement('/updateNewAccountView');
       } else {
         print('Password does not match.');
         errMessage = "Error! username or password incorrect";
@@ -143,7 +146,7 @@ class CreateUserController extends GetxController {
       userExisting = usernameController.text.trim();
       showLoading = false;
       update();
-      context.push('/signInExistingUserView');
+      context.pushReplacement('/signInExistingUserView');
     } else {
       print('User does not exist. Creating new user . . .');
       registerUser(context);
@@ -174,7 +177,14 @@ class CreateUserController extends GetxController {
               Colors.green,
               1000),
         )
-        .whenComplete(() => gotoHomepage(context));
+        .whenComplete(() async {
+      GlobalVariables.myUsername = usernameController.text.trim();
+      print("GlobalVariables.myUsername: ${GlobalVariables.myUsername}");
+      errMessage = " ";
+      showLoading = false;
+      update();
+      context.pushReplacement('/updateNewAccountView');
+    });
   }
 
   /// Upload image from gallery
@@ -215,28 +225,36 @@ class CreateUserController extends GetxController {
           .ref()
           .child(
               'own_the_city/user_profile_images/${GlobalVariables.myUsername}')
-          .putFile(file)
-          .whenComplete(
-            () => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: const Text(
-                  'Great! Image uploaded',
-                  style: TextStyle(color: Colors.amber),
-                ),
-                backgroundColor: Colors.green[800],
-                action: SnackBarAction(
-                  label: '',
-                  onPressed: () {
-                    // Do nothing!
-                  },
-                ),
-              ),
-            ),
-          );
+          .putFile(file);
 
       /// Generate download
       var downloadUrl = await snapshot.ref.getDownloadURL();
       imageUrl = downloadUrl;
+
+      UserAccountModel createAccountData = UserAccountModel()
+        ..city = citySelected
+        ..country = countrySelected
+        ..profileImageLink = imageUrl;
+
+      DatabaseReference ref = FirebaseDatabase.instance
+          .ref("user_details/${GlobalVariables.myUsername}");
+
+      print(createAccountData.toJson());
+
+      await ref
+          .update(createAccountData.toJson())
+          .whenComplete(
+            () => showCustomSnackBar(
+                context,
+                "User ${usernameController.text.trim()} created",
+                () {},
+                Colors.green,
+                1000),
+          )
+          .whenComplete(() => gotoHomepage(context));
+    } else {
+      errMessage = "Ensure all fields are filled";
+      update();
     }
   }
 }

@@ -36,7 +36,7 @@ class CreateAccountView extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(30),
         child: SizedBox(
           height: size.height,
