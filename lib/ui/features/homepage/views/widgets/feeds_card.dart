@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:own_the_city/app/models/feed_model.dart';
 import 'package:own_the_city/ui/features/homepage/views/widgets/animated_icon.dart';
 import 'package:own_the_city/ui/features/homepage/views/widgets/carousel_index_widget.dart';
+import 'package:own_the_city/ui/features/record_screen/view/record_view.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
@@ -39,8 +40,16 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 6),
-      margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 16,
+        bottom: 6,
+      ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 0,
+        vertical: 8,
+      ),
       width: screenSize(context).width,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
@@ -109,6 +118,11 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
                     widget.feedData!.feedCoverPictureLink.length > 1
                         ? true
                         : false,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    activePage = index;
+                  });
+                },
               ),
               items: widget.feedData?.feedCoverPictureLink.map((i) {
                 return Builder(
@@ -130,39 +144,46 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
               }).toList(),
             ),
           ),
-          Center(
-            child: SizedBox(
-              width: 100,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.feedData?.feedCoverPictureLink.length,
-                itemBuilder: (context, index) => CarouselSliderWidget(
-                  indexOn: activePage == index,
-                ),
-              ),
-            ),
-          ),
+          CustomSpacer(3),
+          widget.feedData!.feedCoverPictureLink.length > 1
+              ? SizedBox(
+                  width: 50,
+                  height: 10,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.feedData?.feedCoverPictureLink.length,
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 2,
+                        vertical: 0,
+                      ),
+                      child: CarouselSliderWidget(
+                        indexOn: activePage == index,
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
           CustomSpacer(5),
           Row(
             children: [
               CustomAnimatedIcon(
-                onPressed: (() {
-                  print("object");
-                }),
+                posterUsername: widget.feedData!.username,
               ),
-              const SizedBox(width: 4),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomSpacer(3),
-                  Text(
-                    '${widget.feedData?.thumbsUp}',
-                    style: AppStyles.regularStringStyle(12, AppColors.black),
-                  ),
-                ],
-              ),
+              // const SizedBox(width: 10),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     CustomSpacer(8),
+              //     Text(
+              //       '${widget.feedData?.thumbsUp}',
+              //       style: AppStyles.regularStringStyle(12, AppColors.black),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
+          CustomSpacer(5),
           ExpandablePanel(
             header: RichText(
               textScaleFactor: 1,
@@ -208,4 +229,8 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
       ),
     );
   }
+}
+
+gaveThumbUp() {
+  log.wtf("Gave a thumbs up");
 }

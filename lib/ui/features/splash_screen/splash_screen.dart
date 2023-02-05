@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:own_the_city/app/helpers/sharedprefs.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
+import 'package:own_the_city/ui/shared/global_variables.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
@@ -36,11 +40,26 @@ class _SplashScreenState extends State<SplashScreen>
     sizeAnimation = Tween(begin: 20.0, end: 50.0).animate(CurvedAnimation(
         parent: animationController!, curve: const Interval(0.0, 0.5)));
 
-    animationController!.addStatusListener((status) {
+    animationController!.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
         log.wtf('Animation completed');
         sleep(const Duration(milliseconds: 200));
-        context.pushReplacement('/createAccountView');
+
+        bool accountExisting;
+        String existingUsername = await getSharedPrefsSavedString("username");
+        log.w('existingUsername: $existingUsername');
+        if (existingUsername != '') {
+          GlobalVariables.myUsername = existingUsername;
+          accountExisting = true;
+          log.wtf('GlobalVariables.myUsername: ${GlobalVariables.myUsername}');
+        } else {
+          accountExisting = false;
+        }
+
+        // context.pushReplacement('/createAccountView');
+        context.pushReplacement(
+          accountExisting ? '/homepageView' : '/createAccountView',
+        );
       }
     });
   }

@@ -25,7 +25,7 @@ class OwnTheCityApp extends StatelessWidget {
           scaffoldMessengerKey: NavigationService.scaffoldMessengerKey,
           debugShowCheckedModeBanner: false,
           theme: appThemeData,
-
+          
           /// GoRouter specific params
           routeInformationProvider: _router.routeInformationProvider,
           routeInformationParser: _router.routeInformationParser,

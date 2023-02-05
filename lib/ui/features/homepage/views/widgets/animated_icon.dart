@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:own_the_city/app/services/snackbar_service.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 
 class CustomAnimatedIcon extends StatefulWidget {
-  final void Function()? onPressed;
-  const CustomAnimatedIcon({super.key, this.onPressed});
+  // final void Function()? onPressed;
+  final String posterUsername;
+  const CustomAnimatedIcon({super.key, required this.posterUsername});
 
   @override
   State<CustomAnimatedIcon> createState() => CustomAnimatedIconState();
@@ -20,7 +22,12 @@ class CustomAnimatedIconState extends State<CustomAnimatedIcon> {
       glowThumb = true;
       turns -= 1.0 / 16.0;
     });
-    widget.onPressed ?? print("No function attached");
+    // widget.onPressed ?? print("No function attached");
+    showCustomSnackBar(
+        context,
+        Text('You gave ${widget.posterUsername} a thumb up'),
+        () {},
+        AppColors.kPrimaryColor,);
   }
 
   @override
@@ -36,7 +43,7 @@ class CustomAnimatedIconState extends State<CustomAnimatedIcon> {
               duration: const Duration(milliseconds: 250),
               child: AvatarGlow(
                 glowColor: glowThumb ? AppColors.kPrimaryColor : Colors.white,
-                endRadius: 20.0,
+                endRadius: 10.0,
                 duration: const Duration(milliseconds: 2000),
                 repeat: true,
                 showTwoGlows: true,

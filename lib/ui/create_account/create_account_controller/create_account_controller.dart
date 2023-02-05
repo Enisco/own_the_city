@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:go_router/go_router.dart';
+import 'package:own_the_city/app/helpers/sharedprefs.dart';
 import 'package:own_the_city/app/services/snackbar_service.dart';
 import 'package:own_the_city/ui/create_account/create_account_model/create_account_model.dart';
 import 'package:own_the_city/ui/shared/global_variables.dart';
@@ -30,7 +31,9 @@ class CreateUserController extends GetxController {
     context.push('/signInUserView');
   }
 
-  void gotoHomepage(BuildContext context) {
+  void gotoHomepage(BuildContext context) async {
+    await saveSharedPrefsStringValue(
+        "username", usernameController.text.trim());
     GlobalVariables.myUsername = usernameController.text.trim();
     print("GlobalVariables.myUsername: ${GlobalVariables.myUsername}");
     print('Going to homepage page');
