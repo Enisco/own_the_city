@@ -14,8 +14,8 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
-class CreateAccountView extends StatelessWidget {
-  CreateAccountView({super.key});
+class SignInUserView extends StatelessWidget {
+  SignInUserView({super.key});
 
   final controller = Get.put(CreateUserController());
 
@@ -28,7 +28,7 @@ class CreateAccountView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.kPrimaryColor,
         title: const Text(
-          "Create Account",
+          "Sign In",
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -72,25 +72,25 @@ class CreateAccountView extends StatelessWidget {
                 width: screenSize(context).width * 0.6,
                 color: Colors.amber[600],
                 child: Text(
-                  'Create Account',
+                  'Sign in',
                   style: AppStyles.regularStringStyle(18, AppColors.plainWhite),
                 ),
                 onPressed: () {
                   SystemChannels.textInput.invokeMethod('TextInput.hide');
-                  controller.attemptToRegisterUser(context);
+                  controller.attemptToSignInUser(context);
                 },
               ),
               CustomSpacer(12),
               RichText(
                 textScaleFactor: 1,
                 text: TextSpan(
-                  text: 'Already have an account? ',
+                  text: 'Don\'t have an account? ',
                   style: TextStyle(
                     color: AppColors.black,
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Sign in here',
+                      text: 'Sign up here',
                       style: AppStyles.regularStringStyle(
                         14,
                         AppColors.kPrimaryColor,
@@ -98,7 +98,7 @@ class CreateAccountView extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           controller.resetValues();
-                          controller.gotoSignInUserPage(context);
+                          Navigator.pop(context);
                         },
                     ),
                   ],

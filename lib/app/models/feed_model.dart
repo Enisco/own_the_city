@@ -1,53 +1,91 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:equatable/equatable.dart';
 
-class FeedModel extends Equatable {
-  String? feedCoverPictureLink;
-  String? feedName;
-  String? feedDescription;
-  int? thumbsUp;
-  String? username;
-  String? userProfilePicsLink;
-  bool? upvoted;
+// To parse this JSON data, do
+//
+//     final FeedModel = FeedModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+FeedModel FeedModelFromJson(String str) => FeedModel.fromJson(json.decode(str));
+
+String FeedModelToJson(FeedModel data) => json.encode(data.toJson());
+
+class FeedModel {
   FeedModel({
-    this.feedCoverPictureLink,
-    this.feedName,
-    this.feedDescription,
-    this.username,
-    this.thumbsUp,
-    this.userProfilePicsLink,
-    this.upvoted,
+    required this.username,
+    required this.thumbsUp,
+    required this.feedCoverPictureLink,
+    required this.feedName,
+    required this.feedDescription,
+    required this.userProfilePicsLink,
+    required this.dateCreated,
+    required this.toponymType,
   });
 
+  String username;
+  int thumbsUp;
+  List<String> feedCoverPictureLink;
+  String feedName;
+  String feedDescription;
+  String userProfilePicsLink;
+  String dateCreated;
+  String toponymType;
+
   FeedModel copyWith({
-    feedCoverPictureLink,
-    feedName,
-    feedDescription,
-    thumbsUp,
-    username,
-    userProfilePicsLink,
-    upvoted,
+    String? username,
+    int? thumbsUp,
+    List<String>? feedCoverPictureLink,
+    String? feedName,
+    String? feedDescription,
+    String? userProfilePicsLink,
+    String? dateCreated,
+    String? toponymType,
   }) =>
       FeedModel(
-        feedCoverPictureLink: feedCoverPictureLink ?? feedCoverPictureLink,
-        feedName: feedName ?? feedName,
-        feedDescription: feedDescription ?? feedDescription,
-        thumbsUp: thumbsUp ?? thumbsUp,
-        username: username ?? username,
-        userProfilePicsLink: userProfilePicsLink ?? userProfilePicsLink,
-        upvoted: upvoted ?? upvoted,
+        username: username ?? this.username,
+        thumbsUp: thumbsUp ?? this.thumbsUp,
+        feedCoverPictureLink: feedCoverPictureLink ?? this.feedCoverPictureLink,
+        feedName: feedName ?? this.feedName,
+        feedDescription: feedDescription ?? this.feedDescription,
+        userProfilePicsLink: userProfilePicsLink ?? this.userProfilePicsLink,
+        dateCreated: dateCreated ?? this.dateCreated,
+        toponymType: toponymType ?? this.toponymType,
       );
+
+  factory FeedModel.fromJson(Map<String, dynamic> json) => FeedModel(
+        username: json["username"],
+        thumbsUp: json["thumbsUp"],
+        feedCoverPictureLink:
+            List<String>.from(json["feedCoverPictureLink"].map((x) => x)),
+        feedName: json["feedName"],
+        feedDescription: json["feedDescription"],
+        userProfilePicsLink: json["userProfilePicsLink"],
+        dateCreated: json["dateCreated"],
+        toponymType: json["toponymType"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "username": username,
+        "thumbsUp": thumbsUp,
+        "feedCoverPictureLink":
+            List<dynamic>.from(feedCoverPictureLink.map((x) => x)),
+        "feedName": feedName,
+        "feedDescription": feedDescription,
+        "userProfilePicsLink": userProfilePicsLink,
+        "dateCreated": dateCreated,
+        "toponymType": toponymType,
+      };
 
   @override
   List<Object?> get props => [
-        feedCoverPictureLink,
-        feedName,
-        feedDescription,
-        thumbsUp,
         username,
         userProfilePicsLink,
-        upvoted,
+        feedName,
+        feedDescription,
+        feedCoverPictureLink,
+        thumbsUp,
+        toponymType,
+        dateCreated,
       ];
 }

@@ -4,10 +4,10 @@ import 'package:cupertino_will_pop_scope/cupertino_will_pop_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/custom_navbar.dart';
 import 'package:own_the_city/ui/features/record_screen/controller/record_controller.dart';
+import 'package:own_the_city/ui/shared/custom_appbar.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
 import 'package:own_the_city/ui/shared/custom_textfield.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
@@ -55,9 +55,11 @@ class _RecordPageViewState extends State<RecordPageView> {
         },
         shouldAddCallback: true,
         child: Scaffold(
-            appBar: AppBar(
-              // backgroundColor: AppColors.kPrimaryColor,
-              title: Text(AppKeyStrings.recordToponym),
+            appBar: PreferredSize(
+              preferredSize: Size(screenSize(context).width, 60),
+              child: CustomAppbar(
+                title: AppKeyStrings.recordToponym,
+              ),
             ),
             backgroundColor: AppColors.plainWhite,
             bottomNavigationBar: CustomNavBar(

@@ -1,9 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:own_the_city/app/models/feed_model.dart';
 import 'package:own_the_city/ui/features/homepage/views/widgets/animated_icon.dart';
+import 'package:own_the_city/ui/features/homepage/views/widgets/carousel_index_widget.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
@@ -20,10 +22,14 @@ class FeedsCard extends StatefulWidget {
 
 class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
   late var _animationController, _progress;
+  late PageController _imageSlideController;
+  int activePage = 0;
 
   @override
   void initState() {
     super.initState();
+    _imageSlideController =
+        PageController(viewportFraction: 1, initialPage: 999);
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
     _progress =
@@ -36,7 +42,6 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
       padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 6),
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
       width: screenSize(context).width,
-      // height: 338,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(31),
@@ -72,25 +77,69 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
+                    CustomSpacer(4),
+                    Row(
+                      children: [
+                        Text(
+                          '${widget.feedData?.dateCreated}',
+                          style: AppStyles.subStringStyle(
+                            11,
+                            AppColors.opaqueDark,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ],
           ),
           CustomSpacer(12),
-          Container(
+          SizedBox(
             width: screenSize(context).width,
-            // width: 330,
-            height: 250,
-            decoration: BoxDecoration(
-              color: AppColors.blueGray,
-              image: DecorationImage(
-                image: NetworkImage(
-                  '${widget.feedData?.feedCoverPictureLink}',
-                ),
-                fit: BoxFit.cover,
+            height: 350,
+            child: CarouselSlider(
+              options: CarouselOptions(
+                height: 350.0,
+                viewportFraction: 1.0,
+                autoPlay: widget.feedData!.feedCoverPictureLink.length > 1
+                    ? true
+                    : false,
+                enableInfiniteScroll:
+                    widget.feedData!.feedCoverPictureLink.length > 1
+                        ? true
+                        : false,
               ),
-              borderRadius: BorderRadius.circular(20),
+              items: widget.feedData?.feedCoverPictureLink.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.blueGray,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            i,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+          Center(
+            child: SizedBox(
+              width: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.feedData?.feedCoverPictureLink.length,
+                itemBuilder: (context, index) => CarouselSliderWidget(
+                  indexOn: activePage == index,
+                ),
+              ),
             ),
           ),
           CustomSpacer(5),
@@ -107,18 +156,31 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
                 children: [
                   CustomSpacer(3),
                   Text(
-                    '${widget.feedData?.thumbsUp} thumbsUp',
+                    '${widget.feedData?.thumbsUp}',
                     style: AppStyles.regularStringStyle(12, AppColors.black),
                   ),
                 ],
               ),
             ],
           ),
-          // CustomSpacer(5),
           ExpandablePanel(
-            header: Text(
-              '${widget.feedData?.feedName}',
-              style: AppStyles.regularStringStyle(14, AppColors.black),
+            header: RichText(
+              textScaleFactor: 1,
+              text: TextSpan(
+                text: '${widget.feedData?.feedName}  ',
+                style: AppStyles.regularStringStyle(15, AppColors.black),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '${widget.feedData?.toponymType}',
+                    style: AppStyles.regularStringStyle(
+                      12,
+                      widget.feedData?.toponymType == 'Natural'
+                          ? const Color.fromARGB(255, 38, 124, 41)
+                          : const Color.fromARGB(255, 243, 152, 32),
+                    ).copyWith(backgroundColor: AppColors.blueGray),
+                  ),
+                ],
+              ),
             ),
             collapsed: Text(
               '${widget.feedData?.feedDescription}',

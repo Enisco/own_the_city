@@ -31,6 +31,8 @@ dependencies:
   expandable: ^5.0.1
   firebase_database: ^10.0.9
   get: ^4.6.5
+  intl: ^0.18.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

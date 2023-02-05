@@ -1,15 +1,20 @@
+import 'dart:math';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:own_the_city/app/helpers/sharedprefs.dart';
+import 'package:intl/intl.dart';
+import 'package:own_the_city/ui/features/record_screen/model/record_model.dart';
+import 'package:own_the_city/ui/shared/global_variables.dart';
 
 enum ToponymTypes { Natural, Artificial }
+
+const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
 
 class RecordToponymController extends GetxController {
   RecordToponymController();
@@ -20,7 +25,27 @@ class RecordToponymController extends GetxController {
 
   List<XFile> imageFilesSelected = [];
   int selectedImageIndex = 0;
-  String? imageUrl;
+  String? toponymId;
+
+  String generateRandomToponymId() {
+    Random random = Random();
+    int randomNumber1 = random.nextInt(10000);
+    int randomNumber2 = random.nextInt(99999);
+    toponymId = GlobalVariables.myUsername.toString() +
+        randomNumber1.toString() +
+        randomNumber2.toString();
+    update();
+    print("generateRandomToponymId: $toponymId");
+    return toponymId!;
+  }
+
+  String formatCurrentTime() {
+    DateTime now = DateTime.now();
+    String lastTime =
+        "${DateFormat.yMMMEd().format(now)} ${DateFormat.jm().format(DateTime.now())}";
+    print(lastTime);
+    return lastTime;
+  }
 
   void changeSelectedImageIndex(int selectedPickIndex) {
     selectedImageIndex = selectedPickIndex;
@@ -29,11 +54,20 @@ class RecordToponymController extends GetxController {
 
   /// Upload image from gallery
   uploadfromGallery() async {
-    final List<XFile> selectedImages = await ImagePicker().pickMultiImage(
+    List<XFile> selectedImages = await ImagePicker().pickMultiImage(
       maxWidth: 1800,
       maxHeight: 1800,
     );
     if (selectedImages.isNotEmpty) {
+      if (selectedImages.length > 4) {
+        selectedImages = [
+          selectedImages[0],
+          selectedImages[1],
+          selectedImages[2],
+          selectedImages[3],
+        ];
+      }
+
       imageFilesSelected.addAll(selectedImages);
       update();
       print("Image List Length:${imageFilesSelected.length}");
@@ -91,104 +125,39 @@ class RecordToponymController extends GetxController {
   }
 
   Future<void> uploadData(BuildContext context) async {
-    String savedQrCode = await SharedPrefs.getSavedString('username');
-    List<String> vals = savedQrCode.split(',');
-    String meterId = vals[0];
-    String simInMeter = vals[1];
-
-    String phoneNumber = await SharedPrefs.getSavedString('Phone number');
     String currentLocation = await _determinePosition();
-
     print('Position coordinates: $currentLocation');
+
+    toponymId = generateRandomToponymId();
 
     /// Upload image to cloud storage
     final firebaseStorage = FirebaseStorage.instance;
-    // var file = File(imageFile!.path);
-    var file = File('');
-    var snapshot = await firebaseStorage
-        .ref()
-        .child('serl/$meterId@$phoneNumber')
-        .putFile(file)
-        .whenComplete(
-          () => ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text(
-                'Great! Image uploaded',
-                style: TextStyle(color: Colors.amber),
-              ),
-              backgroundColor: Colors.green[800],
-              action: SnackBarAction(
-                label: '',
-                onPressed: () {
-                  // Do nothing!
-                },
-              ),
-            ),
-          ),
-        );
+    List downloadUrls = <String>[];
 
-    /// Generate download
-    var downloadUrl = await snapshot.ref.getDownloadURL();
-    imageUrl = downloadUrl;
+    for (int index = 0; index < 4; index++) {
+      var snapshot = await firebaseStorage
+          .ref()
+          .child('own_the_city/$toponymId/$index')
+          .putFile(File(imageFilesSelected[index].path))
+          .whenComplete(() => print("Uploaded image $index"));
+
+      /// Generate download links
+      var downloadUrl = await snapshot.ref.getDownloadURL();
+      downloadUrls.add(downloadUrl);
+    }
     update();
-    DateTime now = DateTime.now();
+
+    String dateString = formatCurrentTime();
 
     /// Map data
-    Map<String, dynamic> data = <String, dynamic>{
-      "Meter ID": meterId,
-      "Time of installation": now.toString(),
-      "Sim inside Meter": simInMeter,
-      "Location address": currentLocation,
-      "Image link": imageUrl
-    };
+    // RecordToponymModel toponymData = RecordToponymModel(username: username, thumbsUp: thumbsUp, feedCoverPictureLink: feedCoverPictureLink, feedName: feedName, feedDescription: feedDescription, userProfilePicsLink: userProfilePicsLink, dateCreated: dateCreated, toponymType: toponymType)
 
-    print('Data to be uploaded: $data');
+    // print('Data to be uploaded: $data');
 
-    /// Upload data to firestore
-    await FirebaseFirestore.instance
-        .collection("serl_meters")
-        .doc(phoneNumber)
-        .set(data)
-        .whenComplete(() => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: const Text(
-                  'Success! Data recorded',
-                  style: TextStyle(color: Colors.white70),
-                ),
-                backgroundColor: Colors.green,
-                action: SnackBarAction(
-                  label: '',
-                  onPressed: () {
-                    // Do nothing!
-                  },
-                ),
-              ),
-            ))
-        .onError((error, stackTrace) => null);
+    // /// Upload data to firestore
 
-    context.go('/');
+    // DatabaseReference ref = FirebaseDatabase.instance
+    //     .ref("user_details/${createAccountData.username}");
+    ///
   }
-
-  /// Update values
-  void updateVals() {
-    update();
-  }
-
-  // Future<bool> checkIfDataExists(String phoneNumber) async {
-  //   bool dataExists;
-  //   final docSnapShot = await FirebaseFirestore.instance
-  //       .collection("serl_meters")
-  //       .doc(phoneNumber)
-  //       .get();
-
-  //   if (docSnapShot.exists) {
-  //     dataExists = true;
-  //     _returnedMeterID = docSnapShot.data()!["Meter ID"].toString();
-  //     print('Returned Meter ID: $_returnedMeterID');
-  //   } else {
-  //     dataExists = false;
-  //   }
-
-  //   return dataExists;
-  // }
 }

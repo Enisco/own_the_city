@@ -3,6 +3,7 @@ import 'package:own_the_city/app/resources/app.transitions.dart';
 import 'package:own_the_city/app/services/navigation_service.dart';
 import 'package:own_the_city/ui/create_account/create_account_view/create_account_view.dart';
 import 'package:own_the_city/ui/create_account/create_account_view/sign_in_exists_view.dart';
+import 'package:own_the_city/ui/create_account/create_account_view/signin_user_view.dart';
 import 'package:own_the_city/ui/features/homepage/views/homepage.dart';
 import 'package:own_the_city/ui/features/record_screen/view/record_view.dart';
 import 'package:own_the_city/ui/features/splash_screen/splash_screen.dart';
@@ -10,8 +11,9 @@ import 'package:own_the_city/ui/features/splash_screen/splash_screen.dart';
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationService.navigatorKey,
-    // initialLocation: '/signInExistingUserView',
-    initialLocation: '/createAccountView',
+    // initialLocation: '/recordPageView',
+    // initialLocation: '/createAccountView',
+    initialLocation: '/homepageView',
     routes: [
       GoRoute(
         path: '/',
@@ -39,6 +41,10 @@ class AppRouter {
       GoRoute(
         path: '/signInExistingUserView',
         builder: (context, state) => SignInExistingUserView(),
+      ),
+      GoRoute(
+        path: '/signInUserView',
+        builder: (context, state) => SignInUserView(),
       ),
 
       GoRoute(

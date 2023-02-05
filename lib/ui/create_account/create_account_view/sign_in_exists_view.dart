@@ -3,6 +3,7 @@
 import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:own_the_city/ui/create_account/create_account_controller/create_account_controller.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
@@ -41,11 +42,34 @@ class SignInExistingUserView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "User with username ${controller.userExisting} already exists. Enter your password to continue.",
-                style: AppStyles.regularStringStyle(
-                  14,
-                  AppColors.black,
+              RichText(
+                textScaleFactor: 1,
+                text: TextSpan(
+                  text: 'User with username ',
+                  style: TextStyle(
+                    color: AppColors.black,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '${controller.userExisting} ',
+                      style: AppStyles.regularStringStyle(
+                        14,
+                        AppColors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'already exists. ',
+                      style: TextStyle(
+                        color: AppColors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Enter your password to continue.',
+                      style: TextStyle(
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               CustomSpacer(20),
@@ -66,7 +90,7 @@ class SignInExistingUserView extends StatelessWidget {
                   },
                 ),
               ),
-              CustomSpacer(50),
+              CustomSpacer(40),
               Center(
                 child: CustomButton(
                   styleBoolValue: true,
@@ -79,12 +103,12 @@ class SignInExistingUserView extends StatelessWidget {
                         AppStyles.regularStringStyle(18, AppColors.plainWhite),
                   ),
                   onPressed: () {
-                    print('Going to sign in page');
-                    controller.attemptToRegisterUser(context);
+                    SystemChannels.textInput.invokeMethod('TextInput.hide');
+                    controller.checkIfUserExistsForSignIn(context);
                   },
                 ),
               ),
-              CustomSpacer(50),
+              CustomSpacer(40),
               GetBuilder<CreateUserController>(
                 init: CreateUserController(),
                 builder: (_) {

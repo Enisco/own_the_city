@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/custom_navbar.dart';
 import 'package:own_the_city/ui/features/homepage/views/widgets/homepage_body.dart';
-import 'package:own_the_city/ui/shared/custom_appbar.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 
 var log = getLogger('HomepageView');
@@ -46,11 +45,15 @@ class _HomepageViewState extends State<HomepageView> {
         child: Scaffold(
           backgroundColor: AppColors.plainWhite,
           extendBodyBehindAppBar: true,
-          // appBar: AppBar(title: Text("Own the City")),
-
-          appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(60),
-            child: CustomAppbar(),
+          appBar: AppBar(
+            title: Text(
+              "Own the City",
+              style: TextStyle(color: AppColors.kPrimaryColor),
+            ),
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            shadowColor: AppColors.plainWhite,
+            elevation: 0,
           ),
           bottomNavigationBar: CustomNavBar(
             color: AppColors.plainWhite,
