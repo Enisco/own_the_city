@@ -90,7 +90,7 @@ class _RecordPageViewState extends State<RecordPageView> {
                                 )
                               : Container(
                                   width: 300,
-                                  height: 400,
+                                  height: 350,
                                   padding: const EdgeInsets.all(1),
                                   decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
@@ -105,7 +105,7 @@ class _RecordPageViewState extends State<RecordPageView> {
                                                 _controller.selectedImageIndex]
                                             .path),
                                       ),
-                                      // fit: BoxFit.fitWidth,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
