@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
                 child: CircleAvatar(
                   backgroundColor: AppColors.blueGray,
                   radius: 21.5,
-                  backgroundImage: NetworkImage(
+                  backgroundImage: CachedNetworkImageProvider(
                     '${widget.feedData?.userProfilePicsLink}',
                   ),
                 ),
@@ -131,7 +132,7 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
                       decoration: BoxDecoration(
                         color: AppColors.blueGray,
                         image: DecorationImage(
-                          image: NetworkImage(
+                          image: CachedNetworkImageProvider(
                             i,
                           ),
                           fit: BoxFit.cover,

@@ -189,8 +189,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
                   print('currentPageIndexCheck: $currentPageIndexCheck');
                   currentPageIndexCheck == true
-                      ? context.push('/createFeedPageOne')
-                      : context.pushReplacement('/createFeedPageOne');
+                      ? context.push('/profilePageView')
+                      : context.pushReplacement('/profilePageView');
                 } else {
                   print('You are already in ProfilePageView');
                 }

@@ -5,7 +5,9 @@ import 'package:own_the_city/ui/create_account/create_account_view/create_accoun
 import 'package:own_the_city/ui/create_account/create_account_view/sign_in_exists_view.dart';
 import 'package:own_the_city/ui/create_account/create_account_view/signin_user_view.dart';
 import 'package:own_the_city/ui/create_account/create_account_view/update_account_view.dart';
+import 'package:own_the_city/ui/features/activity/activity_view/activity_view.dart';
 import 'package:own_the_city/ui/features/homepage/homepage_views/homepage.dart';
+import 'package:own_the_city/ui/features/profile/profile_view/profile_view.dart';
 import 'package:own_the_city/ui/features/record_screen/record_view/record_view.dart';
 import 'package:own_the_city/ui/features/splash_screen/splash_screen.dart';
 
@@ -28,15 +30,29 @@ class AppRouter {
       GoRoute(
         path: '/homepageView',
         builder: (context, state) => const HomepageView(),
-        pageBuilder: (context, state) => CustomFadeTransition(
-            child: const HomepageView(), key: state.pageKey),
+        // pageBuilder: (context, state) => CustomFadeTransition(
+        //     child: const HomepageView(), key: state.pageKey),
       ),
       GoRoute(
         path: '/recordPageView',
         builder: (context, state) => const RecordPageView(),
-        pageBuilder: (context, state) => CustomFadeTransition(
-            child: const RecordPageView(), key: state.pageKey),
+        // pageBuilder: (context, state) => CustomFadeTransition(
+        //     child: const RecordPageView(), key: state.pageKey),
       ),
+      GoRoute(
+        path: '/profilePageView',
+        builder: (context, state) => const ProfilePageView(),
+        // pageBuilder: (context, state) => CustomFadeTransition(
+        //     child: const ProfilePageView(), key: state.pageKey),
+      ),
+      GoRoute(
+        path: '/activityPageView',
+        builder: (context, state) => const ActivityPageView(),
+        // pageBuilder: (context, state) => CustomFadeTransition(
+        //     child: const ActivityPageView(), key: state.pageKey),
+      ),
+      // 
+      // 
       GoRoute(
         path: '/createAccountView',
         builder: (context, state) => CreateAccountView(),
@@ -54,12 +70,6 @@ class AppRouter {
         builder: (context, state) => UpdateNewAccountView(),
       ),
 
-      GoRoute(
-        path: '/splashScreen',
-        builder: (context, state) => const SplashScreen(),
-        pageBuilder: (context, state) => CustomFadeTransition(
-            child: const SplashScreen(), key: state.pageKey),
-      ),
     ],
   );
 }

@@ -6,7 +6,8 @@ import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
 class CustomAppbar extends StatelessWidget {
   final String? title;
-  const CustomAppbar({super.key, this.title});
+  final Color? appbarColor, titleColor;
+  const CustomAppbar({super.key, this.title, this.appbarColor, this.titleColor});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +15,11 @@ class CustomAppbar extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       width: screenSize(context).width,
       height: 60,
-      color: AppColors.kPrimaryColor,
+      color: appbarColor ?? AppColors.kPrimaryColor,
       child: Center(
         child: Text(
           title ?? AppKeyStrings.ownTheCity,
-          style: AppStyles.regularStringStyle(18, AppColors.plainWhite),
+          style: AppStyles.regularStringStyle(18, titleColor ?? AppColors.plainWhite),
         ),
       ),
     );

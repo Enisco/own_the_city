@@ -2,6 +2,8 @@
 //
 //     final UserAccountModel = UserAccountModelFromJson(jsonString);
 
+// ignore_for_file: must_be_immutable
+
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';

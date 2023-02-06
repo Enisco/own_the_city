@@ -21,6 +21,8 @@ class AppColors {
 
   static Color kPrimaryColor = Colors.teal;
 
+  // static Color kPrimaryColor = Colors.teal;
+
   static Color fullBlack = fromHex('#000000');
 
   static Color darkGray = fromHex('#7e1a1818');

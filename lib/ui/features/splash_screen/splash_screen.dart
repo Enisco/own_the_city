@@ -58,7 +58,8 @@ class _SplashScreenState extends State<SplashScreen>
 
         // context.pushReplacement('/createAccountView');
         context.pushReplacement(
-          accountExisting ? '/homepageView' : '/createAccountView',
+          // accountExisting ? '/homepageView' : '/createAccountView',
+          accountExisting ? '/profilePageView' : '/createAccountView',
         );
       }
     });

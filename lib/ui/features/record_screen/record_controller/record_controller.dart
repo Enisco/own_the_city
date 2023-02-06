@@ -169,6 +169,7 @@ class RecordToponymController extends GetxController {
       print(toponymData.toJson());
 
       await ref.set(toponymData.toJson()).whenComplete(() async {
+        /// Get my details from RT Db
         final getDataRef = FirebaseDatabase.instance.ref();
         final getDataSnapshot = await getDataRef
             .child('user_details/${GlobalVariables.myUsername}')
@@ -210,6 +211,7 @@ class RecordToponymController extends GetxController {
         }
         log.wtf("updateAccountData: ${updateAccountData.toJson()}");
 
+        /// Update Data back to the Db
         DatabaseReference ref = FirebaseDatabase.instance
             .ref("user_details/${GlobalVariables.myUsername}");
 
