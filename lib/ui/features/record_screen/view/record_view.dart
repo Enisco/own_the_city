@@ -116,7 +116,8 @@ class _RecordPageViewState extends State<RecordPageView> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(7)),
                                     border: Border.all(
-                                        color: AppColors.kPrimaryColor),
+                                      color: AppColors.kPrimaryColor,
+                                    ),
                                     color: AppColors.lighterGray,
                                   ),
                                   height: 90,
