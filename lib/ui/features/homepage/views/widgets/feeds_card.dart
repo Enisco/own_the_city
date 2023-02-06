@@ -3,7 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:own_the_city/app/models/feed_model.dart';
+import 'package:own_the_city/ui/features/homepage/models/feed_model.dart';
 import 'package:own_the_city/ui/features/homepage/views/widgets/animated_icon.dart';
 import 'package:own_the_city/ui/features/homepage/views/widgets/carousel_index_widget.dart';
 import 'package:own_the_city/ui/features/record_screen/view/record_view.dart';

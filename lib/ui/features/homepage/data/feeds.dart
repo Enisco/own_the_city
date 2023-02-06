@@ -1,4 +1,4 @@
-import 'package:own_the_city/app/models/feed_model.dart';
+import 'package:own_the_city/ui/features/homepage/models/feed_model.dart';
 
 List<FeedModel> feedData = [
   sampleFeedData2,

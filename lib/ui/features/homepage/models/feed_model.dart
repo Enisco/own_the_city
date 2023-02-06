@@ -1,10 +1,7 @@
-import 'package:equatable/equatable.dart';
-
 // To parse this JSON data, do
 //
 //     final FeedModel = FeedModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 FeedModel FeedModelFromJson(String str) => FeedModel.fromJson(json.decode(str));
