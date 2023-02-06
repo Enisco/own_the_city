@@ -23,8 +23,6 @@ var log = getLogger('RecordPageView');
 
 enum ToponymTypes { Natural, Artificial }
 
-const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
-
 class RecordToponymController extends GetxController {
   RecordToponymController();
 
@@ -32,13 +30,23 @@ class RecordToponymController extends GetxController {
 
   TextEditingController toponymNameController = TextEditingController();
   TextEditingController toponymDescriptionController = TextEditingController();
-  TextEditingController toponymYearController = TextEditingController();
 
   var selectedToponymTypes = ToponymTypes.Natural;
 
   List<XFile> imageFilesSelected = [];
   int selectedImageIndex = 0;
   String? recordToponymId;
+
+  resetValues() {
+    showLoading = false;
+
+    toponymNameController = TextEditingController();
+    toponymDescriptionController = TextEditingController();
+
+    selectedToponymTypes = ToponymTypes.Natural;
+    imageFilesSelected = [];
+    update();
+  }
 
   String generateRandomrecordToponymId() {
     Random random = Random();
@@ -222,10 +230,9 @@ class RecordToponymController extends GetxController {
   }
 
   void gotoHomepage(BuildContext context) {
-    showLoading = false;
+    resetValues();
     Provider.of<CurrentPage>(context, listen: false).setCurrentPageIndex(0);
     update();
-    // context.pushReplacement('/homepageView');
     context.pop();
   }
 }
