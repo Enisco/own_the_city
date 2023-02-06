@@ -51,6 +51,7 @@ class CreateUserController extends GetxController {
   void gotoHomepage(BuildContext context) async {
     await saveSharedPrefsStringValue(
         "username", usernameController.text.trim());
+    await saveSharedPrefsStringValue("profileImageLink", imageUrl!);
     print('Going to homepage page');
     resetValues();
     context.go('/homepageView');
@@ -218,6 +219,10 @@ class CreateUserController extends GetxController {
         stateSelected != ' ' &&
         citySelected != ' ' &&
         imageFile != null) {
+      errMessage = '';
+      showLoading = true;
+      update();
+
       /// Upload image to cloud storage
       final firebaseStorage = FirebaseStorage.instance;
       var file = File(imageFile!.path);
@@ -245,10 +250,6 @@ class CreateUserController extends GetxController {
           ..city = citySelected
           ..country = countrySelected
           ..profileImageLink = imageUrl;
-        // userAccountModel.copyWith(
-        //     city: citySelected,
-        //     country: countrySelected,
-        //     profileImageLink: imageUrl);
         log.w("userAccountModel: ${userAccountModel.toJson()}");
 
         updateAccountData = userAccountModel;

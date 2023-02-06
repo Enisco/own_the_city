@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:own_the_city/app/helpers/sharedprefs.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/app/services/snackbar_service.dart';
 import 'package:own_the_city/ui/features/record_screen/model/record_model.dart';
@@ -23,6 +24,8 @@ const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
 
 class RecordToponymController extends GetxController {
   RecordToponymController();
+
+  bool showLoading = false;
 
   TextEditingController toponymNameController = TextEditingController();
   TextEditingController toponymDescriptionController = TextEditingController();
@@ -100,44 +103,12 @@ class RecordToponymController extends GetxController {
     print("Returning");
   }
 
-  /// get current location
-  Future<String> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    print('Position determined: $position');
-
-    return position.toString();
-  }
-
   Future<void> uploadRecordToponymData(BuildContext context) async {
     if (toponymNameController.text.trim().isNotEmpty &&
         toponymDescriptionController.text.trim().isNotEmpty &&
         imageFilesSelected.isNotEmpty) {
-      String currentLocation = await _determinePosition();
-      print('Position coordinates: $currentLocation');
-
+      showLoading = true;
+      update();
       recordToponymId = generateRandomrecordToponymId();
 
       /// Upload image to cloud storage
@@ -161,6 +132,10 @@ class RecordToponymController extends GetxController {
       String dateString = formatCurrentTime();
       log.wtf("dateString: $dateString");
 
+      /// get saved profileImageLink
+      String myProfileImageLink =
+          await getSharedPrefsSavedString("profileImageLink");
+
       /// Map data
       RecordToponymModel toponymData = RecordToponymModel(
         username: GlobalVariables.myUsername,
@@ -168,14 +143,14 @@ class RecordToponymController extends GetxController {
         feedCoverPictureLink: downloadUrls,
         feedName: toponymNameController.text.trim(),
         feedDescription: toponymDescriptionController.text.trim(),
-        userProfilePicsLink: "userProfilePicsLink",
+        userProfilePicsLink: myProfileImageLink,
         dateCreated: dateString,
         toponymType: selectedToponymTypes.name,
       );
 
-      print('toponymData to be uploaded: $toponymData');
+      print('toponymData to be uploaded: ${toponymData.toJson()}');
 
-      // /// Upload data to firestore
+      /// Upload data to firestore
       DatabaseReference ref =
           FirebaseDatabase.instance.ref("toponym_data/$recordToponymId");
 
@@ -185,9 +160,17 @@ class RecordToponymController extends GetxController {
           .set(toponymData.toJson())
           .whenComplete(
             () => showCustomSnackBar(
-                context, "Voila! Toponym recorded", () {}, Colors.green, 1000),
+              context,
+              "Voila! Toponym recorded",
+              () {},
+              Colors.green,
+              1000,
+            ),
           )
-          .whenComplete(() => context.pop());
+          .whenComplete(() {
+        showLoading = false;
+        context.pop();
+      });
     } else {
       showCustomSnackBar(context, "Ensure all fields are filled", () {},
           AppColors.coolRed, 1000);

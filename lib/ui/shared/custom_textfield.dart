@@ -123,7 +123,7 @@ class CustomTextField extends StatelessWidget {
         enabled: enabled,
         scrollPadding: scrollPadding ?? const EdgeInsets.only(bottom: 200),
         autofocus: autofocus ?? false,
-        textCapitalization: textCapitalization ?? TextCapitalization.words,
+        textCapitalization: textCapitalization ?? TextCapitalization.sentences,
         maxLines: maxLines,
         readOnly: readOnly ?? false,
         obscureText: obscureText ?? false,

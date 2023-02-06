@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cupertino_will_pop_scope/cupertino_will_pop_scope.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -265,7 +266,8 @@ class _RecordPageViewState extends State<RecordPageView> {
                           ListTile(
                             onTap: () => setState(() {
                               log.w(_controller.selectedToponymTypes);
-                              _controller.selectedToponymTypes = ToponymTypes.Artificial;
+                              _controller.selectedToponymTypes =
+                                  ToponymTypes.Artificial;
                               log.wtf(_controller.selectedToponymTypes);
                             }),
                             contentPadding: const EdgeInsets.symmetric(
@@ -297,9 +299,24 @@ class _RecordPageViewState extends State<RecordPageView> {
                                   20, AppColors.plainWhite),
                             ),
                             onPressed: () {
-                              whenPressed();
+                              SystemChannels.textInput
+                                  .invokeMethod('TextInput.hide');
+                              _controller.uploadRecordToponymData(context);
                             },
-                          )
+                          ),
+                          CustomSpacer(10),
+                          GetBuilder<RecordToponymController>(
+                            init: RecordToponymController(),
+                            builder: (_) {
+                              return Center(
+                                child: _controller.showLoading == true
+                                    ? Platform.isAndroid
+                                        ? const CircularProgressIndicator()
+                                        : const CupertinoActivityIndicator()
+                                    : const SizedBox.shrink(),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     );
@@ -308,8 +325,4 @@ class _RecordPageViewState extends State<RecordPageView> {
       ),
     );
   }
-}
-
-void whenPressed() {
-  print('Pressed');
 }
