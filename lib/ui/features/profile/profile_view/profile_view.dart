@@ -61,7 +61,6 @@ class _ProfilePageViewState extends State<ProfilePageView> {
               titleColor: AppColors.kPrimaryColor,
             ),
           ),
-          backgroundColor: AppColors.plainWhite,
           bottomNavigationBar: CustomNavBar(
             color: AppColors.plainWhite,
           ),
@@ -101,7 +100,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
                                 : CircleAvatar(
                                     backgroundColor: AppColors.blueGray,
                                     foregroundImage: CachedNetworkImageProvider(
-                                        _controller.profileImageLink),
+                                      _controller.profileImageLink,
+                                    ),
                                   ),
                           ),
                         ),
@@ -144,7 +144,6 @@ class _ProfilePageViewState extends State<ProfilePageView> {
                                           color: const Color.fromARGB(
                                                   255, 186, 221, 238)
                                               .withOpacity(0.2),
-                                          // color: AppColors.lighterGray,
                                         ),
                                         width: screenSize(context).width,
                                         child: Column(
@@ -180,9 +179,6 @@ class _ProfilePageViewState extends State<ProfilePageView> {
                                         borderRadius: const BorderRadius.all(
                                           Radius.circular(15),
                                         ),
-                                        // color: const Color.fromARGB(
-                                        //         255, 186, 221, 238)
-                                        //     .withOpacity(0.2),
                                         color: AppColors.lighterGray,
                                       ),
                                       child: Column(

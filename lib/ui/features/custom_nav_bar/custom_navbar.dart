@@ -222,7 +222,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
-                      CupertinoIcons.plus_app,
+                      CupertinoIcons.person,
                       color: Provider.of<CurrentPage>(context, listen: false)
                                   .currentPageIndex ==
                               2

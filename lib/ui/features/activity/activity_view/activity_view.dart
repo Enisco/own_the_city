@@ -54,7 +54,6 @@ class _ActivityPageViewState extends State<ActivityPageView> {
               title: AppKeyStrings.activity,
             ),
           ),
-          backgroundColor: AppColors.plainWhite,
           bottomNavigationBar: CustomNavBar(
             color: AppColors.plainWhite,
           ),
@@ -64,7 +63,12 @@ class _ActivityPageViewState extends State<ActivityPageView> {
             child: GetBuilder<ActivityController>(
               init: ActivityController(),
               builder: (_) {
-                return const Center();
+                return  Center(
+                  child: Column(
+                    children: [
+                    ],
+                  ),
+                );
               },
             ),
           ),
