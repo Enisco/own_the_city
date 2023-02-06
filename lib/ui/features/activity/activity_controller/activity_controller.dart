@@ -14,7 +14,7 @@ import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/app/services/snackbar_service.dart';
 import 'package:own_the_city/ui/create_account/create_account_model/create_account_model.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
-import 'package:own_the_city/ui/features/record_screen/model/record_model.dart';
+import 'package:own_the_city/ui/features/record_screen/record_model/record_model.dart';
 import 'package:own_the_city/ui/shared/global_variables.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:provider/provider.dart';
