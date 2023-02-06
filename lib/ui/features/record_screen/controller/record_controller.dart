@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:firebase_database/firebase_database.dart';
@@ -7,14 +8,16 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:own_the_city/app/helpers/sharedprefs.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/app/services/snackbar_service.dart';
+import 'package:own_the_city/ui/create_account/create_account_model/create_account_model.dart';
+import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
 import 'package:own_the_city/ui/features/record_screen/model/record_model.dart';
 import 'package:own_the_city/ui/shared/global_variables.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
+import 'package:provider/provider.dart';
 
 var log = getLogger('RecordPageView');
 
@@ -104,6 +107,7 @@ class RecordToponymController extends GetxController {
   }
 
   Future<void> uploadRecordToponymData(BuildContext context) async {
+    int recordToponymPoints = 50;
     if (toponymNameController.text.trim().isNotEmpty &&
         toponymDescriptionController.text.trim().isNotEmpty &&
         imageFilesSelected.isNotEmpty) {
@@ -118,9 +122,9 @@ class RecordToponymController extends GetxController {
       for (int index = 0; index < 4; index++) {
         var snapshot = await firebaseStorage
             .ref()
-            .child('own_the_city/$recordToponymId/${index + 1}')
+            .child('own_the_city/toponyms_images/$recordToponymId/${index + 1}')
             .putFile(File(imageFilesSelected[index].path))
-            .whenComplete(() => print("Uploaded image ${index + 1}"));
+            .whenComplete(() => log.w("Uploaded image ${index + 1}"));
 
         /// Generate download links
         var downloadUrl = await snapshot.ref.getDownloadURL();
@@ -156,24 +160,71 @@ class RecordToponymController extends GetxController {
 
       print(toponymData.toJson());
 
-      await ref
-          .set(toponymData.toJson())
-          .whenComplete(
-            () => showCustomSnackBar(
-              context,
-              "Voila! Toponym recorded",
-              () {},
-              Colors.green,
-              1000,
-            ),
-          )
-          .whenComplete(() {
-        showLoading = false;
-        context.pop();
+      await ref.set(toponymData.toJson()).whenComplete(() async {
+        final getDataRef = FirebaseDatabase.instance.ref();
+        final getDataSnapshot = await getDataRef
+            .child('user_details/${GlobalVariables.myUsername}')
+            .get();
+
+        UserAccountModel updateAccountData = UserAccountModel();
+
+        if (getDataSnapshot.exists) {
+          print("User exists: ${getDataSnapshot.value}");
+
+          UserAccountModel userAccountModel = userAccountModelFromJson(
+              jsonEncode(getDataSnapshot.value).toString());
+          log.w("Retrieved total points is ${userAccountModel.totalPoints}");
+
+          userAccountModel.totalPoints = userAccountModel.totalPoints ?? 0;
+          userAccountModel.totalToponymsRecorded =
+              userAccountModel.totalToponymsRecorded ?? 0;
+          userAccountModel.naturalToponymsRecorded =
+              userAccountModel.naturalToponymsRecorded ?? 0;
+          userAccountModel.artificialToponymsRecorded =
+              userAccountModel.artificialToponymsRecorded ?? 0;
+
+          userAccountModel
+            ..totalPoints = userAccountModel.totalPoints! + recordToponymPoints
+            ..totalToponymsRecorded =
+                userAccountModel.totalToponymsRecorded! + 1
+            ..naturalToponymsRecorded =
+                selectedToponymTypes == ToponymTypes.Natural
+                    ? userAccountModel.naturalToponymsRecorded! + 1
+                    : userAccountModel.naturalToponymsRecorded
+            ..artificialToponymsRecorded =
+                selectedToponymTypes == ToponymTypes.Artificial
+                    ? userAccountModel.artificialToponymsRecorded! + 1
+                    : userAccountModel.artificialToponymsRecorded;
+          log.w("userAccountModel: ${userAccountModel.toJson()}");
+
+          updateAccountData = userAccountModel;
+          update();
+        }
+        log.wtf("updateAccountData: ${updateAccountData.toJson()}");
+
+        DatabaseReference ref = FirebaseDatabase.instance
+            .ref("user_details/${GlobalVariables.myUsername}");
+
+        print(updateAccountData.toJson());
+
+        await ref
+            .update(updateAccountData.toJson())
+            .whenComplete(
+              () => showCustomSnackBar(context, "Successful! Toponym recorded.",
+                  () {}, Colors.green, 1000),
+            )
+            .whenComplete(() => gotoHomepage(context));
       });
     } else {
       showCustomSnackBar(context, "Ensure all fields are filled", () {},
           AppColors.coolRed, 1000);
     }
+  }
+
+  void gotoHomepage(BuildContext context) {
+    showLoading = false;
+    Provider.of<CurrentPage>(context, listen: false).setCurrentPageIndex(0);
+    update();
+    context.pushReplacement('/homepageView');
   }
 }

@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/custom_navbar.dart';
+import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
 import 'package:own_the_city/ui/features/record_screen/controller/record_controller.dart';
 import 'package:own_the_city/ui/shared/custom_appbar.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
@@ -16,6 +18,7 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
+import 'package:provider/provider.dart';
 
 var log = getLogger('RecordPageView');
 
@@ -45,11 +48,9 @@ class _RecordPageViewState extends State<RecordPageView> {
     return SafeArea(
       child: ConditionalWillPopScope(
         onWillPop: () async {
-          if (Platform.isAndroid) {
-            SystemNavigator.pop();
-          } else if (Platform.isIOS) {
-            exit(0);
-          }
+          Provider.of<CurrentPage>(context, listen: false)
+              .setCurrentPageIndex(0);
+          context.pop();
           return false;
         },
         shouldAddCallback: true,
@@ -98,10 +99,13 @@ class _RecordPageViewState extends State<RecordPageView> {
                                         color: AppColors.kPrimaryColor),
                                     color: Colors.grey[100],
                                     image: DecorationImage(
-                                      image: FileImage(File(_controller
-                                          .imageFilesSelected[
-                                              _controller.selectedImageIndex]
-                                          .path)),
+                                      image: FileImage(
+                                        File(_controller
+                                            .imageFilesSelected[
+                                                _controller.selectedImageIndex]
+                                            .path),
+                                      ),
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),

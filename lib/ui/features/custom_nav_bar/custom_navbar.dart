@@ -40,7 +40,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   print('Home selected');
                   Provider.of<CurrentPage>(context, listen: false)
                       .setCurrentPageIndex(0);
-                  context.pop();
+                  context.canPop() ? context.pop() : () {};
                 } else {
                   print('You are already in homepage');
                 }

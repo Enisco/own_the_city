@@ -14,7 +14,7 @@ class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationService.navigatorKey,
     // initialLocation: '/recordPageView',
-    initialLocation: '/createAccountView',
+    // initialLocation: '/createAccountView',
     // initialLocation: '/updateNewAccountView',
     // initialLocation: '/homepageView',
     routes: [
