@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-FeedModel FeedModelFromJson(String str) => FeedModel.fromJson(json.decode(str));
+FeedModel feedModelFromJson(String str) => FeedModel.fromJson(json.decode(str));
 
-String FeedModelToJson(FeedModel data) => json.encode(data.toJson());
+String feedModelToJson(FeedModel data) => json.encode(data.toJson());
 
 class FeedModel {
   FeedModel({

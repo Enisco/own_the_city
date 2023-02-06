@@ -3,9 +3,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:own_the_city/ui/features/homepage/models/feed_model.dart';
-import 'package:own_the_city/ui/features/homepage/views/widgets/animated_icon.dart';
-import 'package:own_the_city/ui/features/homepage/views/widgets/carousel_index_widget.dart';
+import 'package:own_the_city/ui/features/homepage/homepage_model/feed_model.dart';
+import 'package:own_the_city/ui/features/homepage/homepage_views/widgets/animated_icon.dart';
+import 'package:own_the_city/ui/features/homepage/homepage_views/widgets/carousel_index_widget.dart';
 import 'package:own_the_city/ui/features/record_screen/view/record_view.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
@@ -106,10 +106,10 @@ class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
           CustomSpacer(12),
           SizedBox(
             width: screenSize(context).width,
-            height: 350,
+            height: 300,
             child: CarouselSlider(
               options: CarouselOptions(
-                height: 350.0,
+                height: 300.0,
                 viewportFraction: 1.0,
                 autoPlay: widget.feedData!.feedCoverPictureLink.length > 1
                     ? true

@@ -225,6 +225,7 @@ class RecordToponymController extends GetxController {
     showLoading = false;
     Provider.of<CurrentPage>(context, listen: false).setCurrentPageIndex(0);
     update();
-    context.pushReplacement('/homepageView');
+    // context.pushReplacement('/homepageView');
+    context.pop();
   }
 }

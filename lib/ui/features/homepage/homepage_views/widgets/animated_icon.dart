@@ -5,7 +5,6 @@ import 'package:own_the_city/app/services/snackbar_service.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 
 class CustomAnimatedIcon extends StatefulWidget {
-  // final void Function()? onPressed;
   final String posterUsername;
   const CustomAnimatedIcon({super.key, required this.posterUsername});
 
@@ -22,13 +21,13 @@ class CustomAnimatedIconState extends State<CustomAnimatedIcon> {
       glowThumb = true;
       turns -= 1.0 / 16.0;
     });
-    // widget.onPressed ?? print("No function attached");
     showCustomSnackBar(
-        context,
-        Text('You gave ${widget.posterUsername} a thumb up'),
-        () {},
-        AppColors.kPrimaryColor,
-        500);
+      context,
+      Text('You gave ${widget.posterUsername} a thumb up'),
+      () {},
+      AppColors.kPrimaryColor,
+      500,
+    );
   }
 
   @override

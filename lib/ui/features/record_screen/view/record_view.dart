@@ -105,7 +105,7 @@ class _RecordPageViewState extends State<RecordPageView> {
                                                 _controller.selectedImageIndex]
                                             .path),
                                       ),
-                                      fit: BoxFit.fill,
+                                      // fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),

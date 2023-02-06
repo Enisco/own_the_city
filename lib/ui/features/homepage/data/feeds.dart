@@ -1,12 +1,5 @@
-import 'package:own_the_city/ui/features/homepage/models/feed_model.dart';
+import 'package:own_the_city/ui/features/homepage/homepage_model/feed_model.dart';
 
-List<FeedModel> feedData = [
-  sampleFeedData2,
-  sampleFeedData3,
-  sampleFeedData0,
-  sampleFeedData1,
-  sampleFeedData4
-];
 
 FeedModel sampleFeedData4 = FeedModel(
     userProfilePicsLink:
