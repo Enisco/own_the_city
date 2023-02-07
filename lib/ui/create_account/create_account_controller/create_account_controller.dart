@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
+// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers, avoid_print
 
 import 'dart:convert';
 import 'dart:io';

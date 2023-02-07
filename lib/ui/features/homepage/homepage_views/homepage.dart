@@ -7,11 +7,9 @@ import 'package:get/get.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/custom_navbar.dart';
 import 'package:own_the_city/ui/features/homepage/homepage_controller/homepage_controller.dart';
-import 'package:own_the_city/ui/features/homepage/homepage_views/widgets/feeds_card.dart';
 import 'package:own_the_city/ui/features/homepage/homepage_views/widgets/homepage_loaded.dart';
 import 'package:own_the_city/ui/features/homepage/homepage_views/widgets/homepage_shimmer_view.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
-import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
 var log = getLogger('HomepageView');
 

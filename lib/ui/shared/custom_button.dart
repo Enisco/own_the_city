@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 

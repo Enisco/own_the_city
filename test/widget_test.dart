@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:own_the_city/main.dart';
 import 'package:own_the_city/own_the_city_app.dart';
 
 void main() {

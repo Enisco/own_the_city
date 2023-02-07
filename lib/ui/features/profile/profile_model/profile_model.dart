@@ -2,6 +2,8 @@
 //
 //     final recordToponymModel = recordToponymModelFromJson(jsonString);
 
+// ignore_for_file: override_on_non_overriding_member
+
 import 'dart:convert';
 
 RecordToponymModel recordToponymModelFromJson(String str) =>

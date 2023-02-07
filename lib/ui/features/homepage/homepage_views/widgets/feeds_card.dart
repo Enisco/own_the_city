@@ -22,19 +22,11 @@ class FeedsCard extends StatefulWidget {
 }
 
 class _FeedsCardState extends State<FeedsCard> with TickerProviderStateMixin {
-  late var _animationController, _progress;
-  late PageController _imageSlideController;
   int activePage = 0;
 
   @override
   void initState() {
     super.initState();
-    _imageSlideController =
-        PageController(viewportFraction: 1, initialPage: 999);
-    _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
-    _progress =
-        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
   }
 
   @override

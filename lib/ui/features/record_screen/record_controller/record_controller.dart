@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:math';
 
@@ -21,6 +23,7 @@ import 'package:provider/provider.dart';
 
 var log = getLogger('RecordPageView');
 
+// ignore: constant_identifier_names
 enum ToponymTypes { Natural, Artificial }
 
 class RecordToponymController extends GetxController {

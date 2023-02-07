@@ -2,6 +2,8 @@
 //
 //     final FeedModel = FeedModelFromJson(jsonString);
 
+// ignore_for_file: override_on_non_overriding_member
+
 import 'dart:convert';
 
 FeedModel feedModelFromJson(String str) => FeedModel.fromJson(json.decode(str));
