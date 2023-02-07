@@ -25,6 +25,7 @@ class HomepageController extends GetxController {
     update();
   }
 
+  /// Format date string to datetime format
   String formatToDateTime(String dateString) {
     DateTime tempDate = DateFormat("EEE, MMM d, yyyy hh:mm aaa")
         .parse(dateString);
