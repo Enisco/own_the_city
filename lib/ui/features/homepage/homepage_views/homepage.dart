@@ -69,11 +69,9 @@ class _HomepageViewState extends State<HomepageView> {
           body: GetBuilder<HomepageController>(
             init: HomepageController(),
             builder: (_) {
-              return 
-              _controller.doneLoading
+              return _controller.doneLoading
                   ? const HompageLoaded()
-                  : 
-                  const HomepageShimmer();
+                  : const HomepageShimmer();
             },
           ),
         ),
