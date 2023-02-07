@@ -1,91 +1,103 @@
 // To parse this JSON data, do
 //
-//     final recordToponymModel = recordToponymModelFromJson(jsonString);
+//     final UserActivityModel = UserActivityModelFromJson(jsonString);
+
+// ignore_for_file: must_be_immutable
 
 import 'dart:convert';
 
-RecordToponymModel recordToponymModelFromJson(String str) =>
-    RecordToponymModel.fromJson(json.decode(str));
+import 'package:equatable/equatable.dart';
 
-String recordToponymModelToJson(RecordToponymModel data) =>
+UserActivityModel userActivityModelFromJson(String str) =>
+    UserActivityModel.fromJson(json.decode(str));
+
+String userActivityModelToJson(UserActivityModel data) =>
     json.encode(data.toJson());
 
-class RecordToponymModel {
-  RecordToponymModel({
-    required this.username,
-    required this.thumbsUp,
-    required this.feedCoverPictureLink,
-    required this.feedName,
-    required this.feedDescription,
-    required this.userProfilePicsLink,
-    required this.dateCreated,
-    required this.toponymType,
+class UserActivityModel extends Equatable {
+  UserActivityModel({
+    this.username,
+    this.password,
+    this.totalPoints,
+    this.totalToponymsRecorded,
+    this.naturalToponymsRecorded,
+    this.artificialToponymsRecorded,
+    this.profileImageLink,
+    this.city,
+    this.country,
   });
 
-  String username;
-  int thumbsUp;
-  List<String> feedCoverPictureLink;
-  String feedName;
-  String feedDescription;
-  String userProfilePicsLink;
-  String dateCreated;
-  String toponymType;
+  String? username;
+  String? password;
+  int? totalPoints;
+  int? totalToponymsRecorded;
+  int? naturalToponymsRecorded;
+  int? artificialToponymsRecorded;
+  String? profileImageLink;
+  String? city;
+  String? country;
 
-  RecordToponymModel copyWith({
+  UserActivityModel copyWith({
     String? username,
-    int? thumbsUp,
-    List<String>? feedCoverPictureLink,
-    String? feedName,
-    String? feedDescription,
-    String? userProfilePicsLink,
-    String? dateCreated,
-    String? toponymType,
+    String? password,
+    int? totalPoints,
+    int? totalToponymsRecorded,
+    int? naturalToponymsRecorded,
+    int? artificialToponymsRecorded,
+    String? profileImageLink,
+    String? city,
+    String? country,
   }) =>
-      RecordToponymModel(
+      UserActivityModel(
         username: username ?? this.username,
-        thumbsUp: thumbsUp ?? this.thumbsUp,
-        feedCoverPictureLink: feedCoverPictureLink ?? this.feedCoverPictureLink,
-        feedName: feedName ?? this.feedName,
-        feedDescription: feedDescription ?? this.feedDescription,
-        userProfilePicsLink: userProfilePicsLink ?? this.userProfilePicsLink,
-        dateCreated: dateCreated ?? this.dateCreated,
-        toponymType: toponymType ?? this.toponymType,
+        password: password ?? this.password,
+        totalPoints: totalPoints ?? this.totalPoints,
+        totalToponymsRecorded:
+            totalToponymsRecorded ?? this.totalToponymsRecorded,
+        naturalToponymsRecorded:
+            naturalToponymsRecorded ?? this.naturalToponymsRecorded,
+        artificialToponymsRecorded:
+            artificialToponymsRecorded ?? this.artificialToponymsRecorded,
+        profileImageLink: profileImageLink ?? this.profileImageLink,
+        city: city ?? this.city,
+        country: country ?? this.country,
       );
 
-  factory RecordToponymModel.fromJson(Map<String, dynamic> json) =>
-      RecordToponymModel(
+  factory UserActivityModel.fromJson(Map<String, dynamic> json) =>
+      UserActivityModel(
         username: json["username"],
-        thumbsUp: json["thumbsUp"],
-        feedCoverPictureLink:
-            List<String>.from(json["feedCoverPictureLink"].map((x) => x)),
-        feedName: json["feedName"],
-        feedDescription: json["feedDescription"],
-        userProfilePicsLink: json["userProfilePicsLink"],
-        dateCreated: json["dateCreated"],
-        toponymType: json["toponymType"],
+        password: json["password"],
+        totalPoints: json["totalPoints"],
+        totalToponymsRecorded: json["totalToponymsRecorded"],
+        naturalToponymsRecorded: json["naturalToponymsRecorded"],
+        artificialToponymsRecorded: json["artificialToponymsRecorded"],
+        profileImageLink: json["profileImageLink"],
+        city: json["city"],
+        country: json["country"],
       );
 
   Map<String, dynamic> toJson() => {
         "username": username,
-        "thumbsUp": thumbsUp,
-        "feedCoverPictureLink":
-            List<dynamic>.from(feedCoverPictureLink.map((x) => x)),
-        "feedName": feedName,
-        "feedDescription": feedDescription,
-        "userProfilePicsLink": userProfilePicsLink,
-        "dateCreated": dateCreated,
-        "toponymType": toponymType,
+        "password": password,
+        "totalPoints": totalPoints,
+        "totalToponymsRecorded": totalToponymsRecorded,
+        "naturalToponymsRecorded": naturalToponymsRecorded,
+        "artificialToponymsRecorded": artificialToponymsRecorded,
+        "profileImageLink": profileImageLink,
+        "city": city,
+        "country": country,
       };
 
   @override
   List<Object?> get props => [
         username,
-        userProfilePicsLink,
-        feedName,
-        feedDescription,
-        feedCoverPictureLink,
-        thumbsUp,
-        toponymType,
-        dateCreated,
+        password,
+        totalPoints,
+        totalToponymsRecorded,
+        naturalToponymsRecorded,
+        artificialToponymsRecorded,
+        profileImageLink,
+        city,
+        country,
       ];
 }

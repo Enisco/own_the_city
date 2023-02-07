@@ -19,8 +19,6 @@ class ProfileController extends GetxController {
   getMyProfileData() async {
     await retrieveSavedProfileImageLink();
     await getMyProfileDataFromDb();
-    // update();
-    // update();
   }
 
   retrieveSavedProfileImageLink() async {

@@ -56,10 +56,10 @@ class _SplashScreenState extends State<SplashScreen>
           accountExisting = false;
         }
 
-        // context.pushReplacement('/createAccountView');
         context.pushReplacement(
-          // accountExisting ? '/homepageView' : '/createAccountView',
-          accountExisting ? '/profilePageView' : '/createAccountView',
+          accountExisting ? '/homepageView' : '/createAccountView',
+          // accountExisting ? '/profilePageView' : '/createAccountView',
+          // accountExisting ? '/activityPageView' : '/createAccountView',
         );
       }
     });
@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen>
         systemNavigationBarColor: AppColors.lighterGray,
       ),
       child: Scaffold(
-        backgroundColor: AppColors.lighterGray,
+        backgroundColor: AppColors.kPrimaryColor,
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(

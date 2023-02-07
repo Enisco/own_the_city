@@ -7,7 +7,8 @@ import 'package:own_the_city/utils/screen_util/screen_util.dart';
 class CustomAppbar extends StatelessWidget {
   final String? title;
   final Color? appbarColor, titleColor;
-  const CustomAppbar({super.key, this.title, this.appbarColor, this.titleColor});
+  const CustomAppbar(
+      {super.key, this.title, this.appbarColor, this.titleColor});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,8 @@ class CustomAppbar extends StatelessWidget {
       child: Center(
         child: Text(
           title ?? AppKeyStrings.ownTheCity,
-          style: AppStyles.regularStringStyle(18, titleColor ?? AppColors.plainWhite),
+          style: AppStyles.regularStringStyle(
+              16, titleColor ?? AppColors.plainWhite),
         ),
       ),
     );

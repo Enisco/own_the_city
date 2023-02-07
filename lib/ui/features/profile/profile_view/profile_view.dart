@@ -127,161 +127,180 @@ class _ProfilePageViewState extends State<ProfilePageView> {
                                   ),
                                 ),
                                 CustomSpacer(30),
-                                Column(
-                                  children: [
-                                    Card(
-                                      elevation: 4,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(15),
+                                    ),
+                                    color: AppColors.plainWhite,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Card(
+                                          elevation: 4,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(15),
+                                            ),
+                                          ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(15),
+                                              ),
+                                              color: const Color.fromARGB(
+                                                      255, 186, 221, 238)
+                                                  .withOpacity(0.2),
+                                            ),
+                                            width: screenSize(context).width,
+                                            child: Column(
+                                              children: [
+                                                CustomSpacer(12),
+                                                Text(
+                                                  "Total Points: ",
+                                                  style: AppStyles
+                                                      .regularStringStyle(
+                                                    15,
+                                                    AppColors.black,
+                                                  ),
+                                                ),
+                                                CustomSpacer(8),
+                                                Text(
+                                                  _controller
+                                                      .myAccountData.totalPoints
+                                                      .toString(),
+                                                  style: AppStyles
+                                                      .regularStringStyle(
+                                                    25,
+                                                    Colors.amber.shade700,
+                                                  ),
+                                                ),
+                                                CustomSpacer(12),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      child: Container(
+                                      CustomSpacer(40),
+                                      Container(
                                         decoration: BoxDecoration(
                                           borderRadius: const BorderRadius.all(
                                             Radius.circular(15),
                                           ),
-                                          color: const Color.fromARGB(
-                                                  255, 186, 221, 238)
-                                              .withOpacity(0.2),
+                                          color: AppColors.lighterGray,
                                         ),
-                                        width: screenSize(context).width,
                                         child: Column(
                                           children: [
-                                            CustomSpacer(12),
+                                            CustomSpacer(20),
                                             Text(
-                                              "Total Points: ",
+                                              "Toponyms Recorded:",
+                                              textAlign: TextAlign.center,
                                               style:
                                                   AppStyles.regularStringStyle(
-                                                15,
-                                                AppColors.black,
+                                                16,
+                                                AppColors.kPrimaryColor,
                                               ),
                                             ),
-                                            CustomSpacer(8),
-                                            Text(
-                                              _controller
-                                                  .myAccountData.totalPoints
-                                                  .toString(),
-                                              style:
-                                                  AppStyles.regularStringStyle(
-                                                25,
-                                                Colors.amber.shade700,
-                                              ),
+                                            CustomSpacer(25),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                SizedBox(
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        _controller
+                                                            .myAccountData
+                                                            .totalToponymsRecorded
+                                                            .toString(),
+                                                        style: AppStyles
+                                                            .regularStringStyle(
+                                                          30,
+                                                          AppColors.black,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "  Total  ",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: AppStyles
+                                                            .regularStringStyle(
+                                                          11,
+                                                          Colors.blue.shade800,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        _controller
+                                                            .myAccountData
+                                                            .naturalToponymsRecorded
+                                                            .toString(),
+                                                        style: AppStyles
+                                                            .regularStringStyle(
+                                                          30,
+                                                          AppColors.black,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        " Natural ",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: AppStyles
+                                                            .regularStringStyle(
+                                                          11,
+                                                          Colors.green.shade800,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        _controller
+                                                            .myAccountData
+                                                            .artificialToponymsRecorded
+                                                            .toString(),
+                                                        style: AppStyles
+                                                            .regularStringStyle(
+                                                          30,
+                                                          AppColors.black,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "Artificial",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: AppStyles
+                                                            .regularStringStyle(
+                                                          11,
+                                                          Colors.red.shade800,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            CustomSpacer(12),
+                                            CustomSpacer(20),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                    CustomSpacer(40),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(15),
-                                        ),
-                                        color: AppColors.lighterGray,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          CustomSpacer(20),
-                                          Text(
-                                            "Toponyms Recorded:",
-                                            textAlign: TextAlign.center,
-                                            style: AppStyles.regularStringStyle(
-                                              16,
-                                              AppColors.kPrimaryColor,
-                                            ),
-                                          ),
-                                          CustomSpacer(25),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              SizedBox(
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      _controller.myAccountData
-                                                          .totalToponymsRecorded
-                                                          .toString(),
-                                                      style: AppStyles
-                                                          .regularStringStyle(
-                                                        30,
-                                                        AppColors.black,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      "  Total  ",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: AppStyles
-                                                          .regularStringStyle(
-                                                        11,
-                                                        Colors.blue.shade800,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      _controller.myAccountData
-                                                          .naturalToponymsRecorded
-                                                          .toString(),
-                                                      style: AppStyles
-                                                          .regularStringStyle(
-                                                        30,
-                                                        AppColors.black,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      " Natural ",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: AppStyles
-                                                          .regularStringStyle(
-                                                        11,
-                                                        Colors.green.shade800,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      _controller.myAccountData
-                                                          .artificialToponymsRecorded
-                                                          .toString(),
-                                                      style: AppStyles
-                                                          .regularStringStyle(
-                                                        30,
-                                                        AppColors.black,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      "Artificial",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: AppStyles
-                                                          .regularStringStyle(
-                                                        11,
-                                                        Colors.red.shade800,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          CustomSpacer(20),
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ],
                             )

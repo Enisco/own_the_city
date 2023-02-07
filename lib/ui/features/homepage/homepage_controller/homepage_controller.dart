@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
-import 'package:own_the_city/ui/features/homepage/data/feeds.dart';
 import 'package:own_the_city/ui/features/homepage/homepage_model/feed_model.dart';
 
 var log = getLogger('HomepageController');

@@ -77,7 +77,7 @@ class _HomepageViewState extends State<HomepageView> {
                         ),
                         color: AppColors.lighterGray,
                         child: ListView.builder(
-                          reverse: true,
+                          reverse: false,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: _controller.feedData.length,
