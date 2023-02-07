@@ -8,6 +8,8 @@ import 'package:own_the_city/ui/features/homepage/homepage_model/feed_model.dart
 var log = getLogger('HomepageController');
 
 class HomepageController extends GetxController {
+  bool doneLoading = false;
+
   List<FeedModel> feedData = [
     // sampleFeedData2,
     // sampleFeedData3,
@@ -23,19 +25,22 @@ class HomepageController extends GetxController {
   }
 
   Future<void> refreshFeeds() async {
-    // DatabaseReference toponysFeedsRef = FirebaseDatabase.instance.ref("toponym_data");
     final toponysFeedsRef = FirebaseDatabase.instance.ref("toponym_data");
 
-    toponysFeedsRef.onChildAdded.listen((event) {
-      FeedModel toponysFeed =
-          feedModelFromJson(jsonEncode(event.snapshot.value).toString());
+    toponysFeedsRef.onChildAdded.listen(
+      (event) {
+        FeedModel toponysFeed =
+            feedModelFromJson(jsonEncode(event.snapshot.value).toString());
+        feedData.add(toponysFeed);
 
-      feedData.add(toponysFeed);
-      update();
+        if (feedData.length > 1) {
+          doneLoading = true;
+          update();
+        }
 
-      // log.wtf("Length of returned feeds: ${event.snapshot}");
-      log.wtf("returned feeds: ${toponysFeed.toJson()}");
-      log.d("Going again");
-    });
+        log.wtf("returned feeds: ${toponysFeed.toJson()}");
+        log.d("Going again");
+      },
+    );
   }
 }

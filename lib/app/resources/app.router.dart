@@ -15,7 +15,7 @@ import 'package:own_the_city/ui/features/splash_screen/splash_screen.dart';
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationService.navigatorKey,
-    initialLocation: '/createAccountView',
+    // initialLocation: '/createAccountView',
     // initialLocation: '/homepageView',
     routes: [
       GoRoute(

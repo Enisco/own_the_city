@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/features/activity/activity_controller/activity_controller.dart';
 import 'package:own_the_city/ui/features/activity/activity_view/widgets/leaderboard_view.dart';
-import 'package:own_the_city/ui/features/activity/activity_view/widgets/shimmer_view.dart';
+import 'package:own_the_city/ui/features/activity/activity_view/widgets/activity_shimmer_view.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/custom_navbar.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
 import 'package:own_the_city/ui/shared/custom_appbar.dart';

@@ -25,7 +25,7 @@ class ActivityController extends GetxController {
   Future<void> refreshUserActivities() async {
     final activitiesFeedsRef = FirebaseDatabase.instance.ref("user_details");
 
-    activitiesFeedsRef.onChildChanged.listen((event) {
+    activitiesFeedsRef.onChildAdded.listen((event) {
       UserActivityModel activityFeed = userActivityModelFromJson(
           jsonEncode(event.snapshot.value).toString());
 
@@ -42,5 +42,6 @@ class ActivityController extends GetxController {
       log.wtf("Returned feeds: ${activityFeed.toJson()}");
       log.d("Going again");
     });
+    
   }
 }
