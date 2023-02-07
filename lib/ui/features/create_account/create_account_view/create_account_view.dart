@@ -6,7 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:own_the_city/ui/create_account/create_account_controller/create_account_controller.dart';
+import 'package:own_the_city/ui/features/create_account/create_account_controller/create_account_controller.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
 import 'package:own_the_city/ui/shared/custom_textfield_.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
@@ -14,8 +14,8 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
-class SignInUserView extends StatelessWidget {
-  SignInUserView({super.key});
+class CreateAccountView extends StatelessWidget {
+  CreateAccountView({super.key});
 
   final controller = Get.put(CreateUserController());
 
@@ -28,7 +28,7 @@ class SignInUserView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.kPrimaryColor,
         title: const Text(
-          "Sign In",
+          "Create Account",
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -72,25 +72,25 @@ class SignInUserView extends StatelessWidget {
                 width: screenSize(context).width * 0.6,
                 color: Colors.amber[600],
                 child: Text(
-                  'Sign in',
+                  'Create Account',
                   style: AppStyles.regularStringStyle(18, AppColors.plainWhite),
                 ),
                 onPressed: () {
                   SystemChannels.textInput.invokeMethod('TextInput.hide');
-                  controller.attemptToSignInUser(context);
+                  controller.attemptToRegisterUser(context);
                 },
               ),
               CustomSpacer(12),
               RichText(
                 textScaleFactor: 1,
                 text: TextSpan(
-                  text: 'Don\'t have an account? ',
+                  text: 'Already have an account? ',
                   style: TextStyle(
                     color: AppColors.black,
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Sign up here',
+                      text: 'Sign in here',
                       style: AppStyles.regularStringStyle(
                         14,
                         AppColors.kPrimaryColor,
@@ -98,7 +98,7 @@ class SignInUserView extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           controller.resetValues();
-                          Navigator.pop(context);
+                          controller.gotoSignInUserPage(context);
                         },
                     ),
                   ],
