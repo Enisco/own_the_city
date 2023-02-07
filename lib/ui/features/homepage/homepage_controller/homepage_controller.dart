@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:intl/intl.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/features/homepage/homepage_model/feed_model.dart';
 
@@ -24,6 +25,14 @@ class HomepageController extends GetxController {
     update();
   }
 
+  String formatToDateTime(String dateString) {
+    DateTime tempDate = DateFormat("EEE, MMM d, yyyy hh:mm aaa")
+        .parse(dateString);
+    String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(tempDate);
+    print('formattedDate = $formattedDate');
+    return formattedDate;
+  }
+
   Future<void> refreshFeeds() async {
     final toponysFeedsRef = FirebaseDatabase.instance.ref("toponym_data");
 
@@ -34,6 +43,9 @@ class HomepageController extends GetxController {
         feedData.add(toponysFeed);
 
         if (feedData.length > 1) {
+          feedData.sort((a, b) => formatToDateTime(b.dateCreated)
+              .compareTo(formatToDateTime(a.dateCreated)));
+
           doneLoading = true;
           update();
         }
