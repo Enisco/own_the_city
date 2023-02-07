@@ -9,10 +9,14 @@ var log = getLogger('ActivityController');
 
 class ActivityController extends GetxController {
   ActivityController();
-  bool detailsLoaded = false;
+  bool doneLoading = false;
   List<UserActivityModel> activityFeedData = [];
 
   getUserActivities() async {
+    doneLoading = false;
+    activityFeedData = [];
+    update();
+
     log.w("getting users activities");
     await refreshUserActivities();
     update();
@@ -21,7 +25,7 @@ class ActivityController extends GetxController {
   Future<void> refreshUserActivities() async {
     final activitiesFeedsRef = FirebaseDatabase.instance.ref("user_details");
 
-    activitiesFeedsRef.onChildAdded.listen((event) {
+    activitiesFeedsRef.onChildChanged.listen((event) {
       UserActivityModel activityFeed = userActivityModelFromJson(
           jsonEncode(event.snapshot.value).toString());
 
@@ -30,10 +34,10 @@ class ActivityController extends GetxController {
       if (activityFeedData.length > 1) {
         activityFeedData
             .sort((a, b) => b.totalPoints!.compareTo(a.totalPoints!));
+        doneLoading = true;
+        update();
       }
       log.v(activityFeedData);
-
-      update();
 
       log.wtf("Returned feeds: ${activityFeed.toJson()}");
       log.d("Going again");

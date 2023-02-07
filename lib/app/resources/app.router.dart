@@ -15,9 +15,7 @@ import 'package:own_the_city/ui/features/splash_screen/splash_screen.dart';
 class AppRouter {
   static final router = GoRouter(
     navigatorKey: NavigationService.navigatorKey,
-    // initialLocation: '/recordPageView',
-    // initialLocation: '/createAccountView',
-    // initialLocation: '/updateNewAccountView',
+    initialLocation: '/createAccountView',
     // initialLocation: '/homepageView',
     routes: [
       GoRoute(
@@ -26,32 +24,22 @@ class AppRouter {
       ),
 
       /// App Pages
-      ///
       GoRoute(
         path: '/homepageView',
         builder: (context, state) => const HomepageView(),
-        // pageBuilder: (context, state) => CustomFadeTransition(
-        //     child: const HomepageView(), key: state.pageKey),
       ),
       GoRoute(
         path: '/recordPageView',
         builder: (context, state) => const RecordPageView(),
-        // pageBuilder: (context, state) => CustomFadeTransition(
-        //     child: const RecordPageView(), key: state.pageKey),
       ),
       GoRoute(
         path: '/profilePageView',
         builder: (context, state) => const ProfilePageView(),
-        // pageBuilder: (context, state) => CustomFadeTransition(
-        //     child: const ProfilePageView(), key: state.pageKey),
       ),
       GoRoute(
         path: '/activityPageView',
         builder: (context, state) => const ActivityPageView(),
-        // pageBuilder: (context, state) => CustomFadeTransition(
-        //     child: const ActivityPageView(), key: state.pageKey),
       ),
-      // 
       // 
       GoRoute(
         path: '/createAccountView',
@@ -69,7 +57,6 @@ class AppRouter {
         path: '/updateNewAccountView',
         builder: (context, state) => UpdateNewAccountView(),
       ),
-
     ],
   );
 }
