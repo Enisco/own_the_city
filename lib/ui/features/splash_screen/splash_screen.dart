@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:own_the_city/app/helpers/sharedprefs.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
 import 'package:own_the_city/ui/shared/global_variables.dart';
@@ -14,7 +14,6 @@ import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/app_constants/app_sub_strings.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
-import 'package:go_router/go_router.dart';
 
 var log = getLogger('SplashScreen');
 
@@ -58,8 +57,6 @@ class _SplashScreenState extends State<SplashScreen>
 
         context.pushReplacement(
           accountExisting ? '/homepageView' : '/createAccountView',
-          // accountExisting ? '/profilePageView' : '/createAccountView',
-          // accountExisting ? '/activityPageView' : '/createAccountView',
         );
       }
     });
@@ -99,12 +96,12 @@ class _SplashScreenState extends State<SplashScreen>
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SvgPicture.asset(
-                            'assets/images/cv_logo.svg',
-                            height: sizeAnimation!.value,
-                            width: sizeAnimation!.value,
+                          Image(
+                            image:
+                                const AssetImage('assets/images/otc_logo.png'),
+                            height: sizeAnimation!.value * 4,
+                            width: sizeAnimation!.value * 4,
                           ),
-                          CustomSpacer(screenSize(context).height / 45),
                           Text(
                             AppKeyStrings.ownTheCity,
                             style: AppStyles.defaultKeyStringStyle(
@@ -114,8 +111,9 @@ class _SplashScreenState extends State<SplashScreen>
                           Text(
                             AppSubStrings.ownTheCitySub,
                             style: AppStyles.subStringStyle(
-                                sizeAnimation!.value * 0.30,
-                                AppColors.plainWhite),
+                              sizeAnimation!.value * 0.30,
+                              AppColors.plainWhite,
+                            ),
                           ),
                         ],
                       );

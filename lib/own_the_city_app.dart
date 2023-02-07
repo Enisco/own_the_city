@@ -17,19 +17,17 @@ class OwnTheCityApp extends StatelessWidget {
     /// ChangeNotifierProvider here
     return ChangeNotifierProvider(
       create: (_) => CurrentPage(),
-      child: AppMainWrapper(
-        child: MaterialApp.router(
-          /// MaterialApp params
-          title: AppKeyStrings.ownTheCity,
-          scaffoldMessengerKey: NavigationService.scaffoldMessengerKey,
-          debugShowCheckedModeBanner: false,
-          theme: appThemeData,
+      child: MaterialApp.router(
+        /// MaterialApp params
+        title: AppKeyStrings.ownTheCity,
+        scaffoldMessengerKey: NavigationService.scaffoldMessengerKey,
+        debugShowCheckedModeBanner: false,
+        theme: appThemeData,
 
-          /// GoRouter specific params
-          routeInformationProvider: _router.routeInformationProvider,
-          routeInformationParser: _router.routeInformationParser,
-          routerDelegate: _router.routerDelegate,
-        ),
+        /// GoRouter specific params
+        routeInformationProvider: _router.routeInformationProvider,
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate,
       ),
     );
   }
