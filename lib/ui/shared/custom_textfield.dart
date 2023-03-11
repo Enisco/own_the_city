@@ -7,7 +7,7 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
-var log = getLogger('CreateAccountView');
+var log = getLogger('CustomTextField');
 
 class CustomTextField extends StatelessWidget {
   CustomTextField({
