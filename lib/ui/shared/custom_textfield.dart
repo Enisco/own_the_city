@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
@@ -5,7 +7,7 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_styles.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';
 
-var log = getLogger('CreateAccountView');
+var log = getLogger('CustomTextField');
 
 class CustomTextField extends StatelessWidget {
   CustomTextField({
@@ -123,7 +125,7 @@ class CustomTextField extends StatelessWidget {
         enabled: enabled,
         scrollPadding: scrollPadding ?? const EdgeInsets.only(bottom: 200),
         autofocus: autofocus ?? false,
-        textCapitalization: textCapitalization ?? TextCapitalization.words,
+        textCapitalization: textCapitalization ?? TextCapitalization.sentences,
         maxLines: maxLines,
         readOnly: readOnly ?? false,
         obscureText: obscureText ?? false,

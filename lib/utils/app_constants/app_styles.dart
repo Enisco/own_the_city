@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 

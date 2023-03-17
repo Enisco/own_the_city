@@ -1,12 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:own_the_city/app/resources/app.router.dart';
 import 'package:own_the_city/app/services/navigation_service.dart';
-import 'package:own_the_city/ui/features/custom_nav_bar/data/page_index_class.dart';
-import 'package:own_the_city/ui/features/splash_screen/presentation/bloc/spl_bloc.dart';
-import 'package:own_the_city/ui/features/record_screen/model/record_model.dart';
+import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
 import 'package:own_the_city/utils/app_constants/app_theme_data.dart';
 import 'package:own_the_city/utils/app_wrapper/app_main_wrapper.dart';
@@ -17,32 +14,20 @@ class OwnTheCityApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// BlocProvider here
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<DemoBloc>(create: (context) => DemoBloc()),
-        // BlocProvider<SearchBloc>(
-        //     create: (context) => SearchBloc()),
-      ],
-      child: ChangeNotifierProvider(
-        create: (_) => RecordToponymModel(),
-        child: ChangeNotifierProvider(
-          create: (_) => CurrentPage(),
-          child: AppMainWrapper(
-            child: MaterialApp.router(
-              /// MaterialApp params
-              title: AppKeyStrings.ownTheCity,
-              scaffoldMessengerKey: NavigationService.scaffoldMessengerKey,
-              debugShowCheckedModeBanner: false,
-              theme: appThemeData,
+    /// ChangeNotifierProvider here
+    return ChangeNotifierProvider(
+      create: (_) => CurrentPage(),
+      child: MaterialApp.router(
+        /// MaterialApp params
+        title: AppKeyStrings.ownTheCity,
+        scaffoldMessengerKey: NavigationService.scaffoldMessengerKey,
+        debugShowCheckedModeBanner: false,
+        theme: appThemeData,
 
-              /// GoRouter specific params
-              routeInformationProvider: _router.routeInformationProvider,
-              routeInformationParser: _router.routeInformationParser,
-              routerDelegate: _router.routerDelegate,
-            ),
-          ),
-        ),
+        /// GoRouter specific params
+        routeInformationProvider: _router.routeInformationProvider,
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate,
       ),
     );
   }

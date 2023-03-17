@@ -4,9 +4,8 @@ import 'package:own_the_city/utils/app_constants/app_colors.dart';
 
 class AppMainWrapper extends StatelessWidget {
   final MaterialApp child;
-  const AppMainWrapper({
+  const AppMainWrapper({super.key, 
     required this.child,
-    Key? key,
   });
 
   @override

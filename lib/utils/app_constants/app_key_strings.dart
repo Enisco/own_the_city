@@ -12,7 +12,7 @@ class AppKeyStrings {
   static String home = 'Home';
   static String record = 'Record';
   static String activity = 'Activity';
-  static String leaderboard = 'LeaderBoard';
+  static String leaderboard = 'Leaderboard';
   static String profile = 'Profile';
   static String enterPhoneNumber = 'Enter Phone Number';
   static String fullName = 'Full Name';

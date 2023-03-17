@@ -21,6 +21,8 @@ class AppColors {
 
   static Color kPrimaryColor = Colors.teal;
 
+  static Color anotherLightGray = fromHex("#D3DDE7");
+
   static Color fullBlack = fromHex('#000000');
 
   static Color darkGray = fromHex('#7e1a1818');
@@ -32,6 +34,12 @@ class AppColors {
   static Color regularBlue = fromHex('#00A3FF');
 
   static Color inputFieldBlack = fromHex('#1A1819');
+
+  static Color gold = fromHex('#FFD700'); // BEC2CB D4AF37
+
+  static Color silver = fromHex('#C0C0C0'); // C0C0C0
+
+  static Color bronze = fromHex('#CD7F32'); // 
 
   static Color? deepBlueGray = Colors.blueGrey[900];
 

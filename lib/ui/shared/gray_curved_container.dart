@@ -1,4 +1,6 @@
 
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/screen_util/screen_util.dart';

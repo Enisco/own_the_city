@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:own_the_city/app/resources/app.logger.dart';
@@ -15,11 +14,13 @@ class BlackPlayBackButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
-        onTap: onPressed ??
-            () {
-              context.pop();
-              log.w('Back button pressed!');
-            },
+        onTap: () {
+          onPressed ??
+              () {
+                context.pop();
+                log.w('Back button pressed!');
+              };
+        },
         child: Container(
           height: 48,
           width: 56,
