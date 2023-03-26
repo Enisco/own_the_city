@@ -6,7 +6,6 @@ import 'package:own_the_city/app/services/navigation_service.dart';
 import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
 import 'package:own_the_city/utils/app_constants/app_theme_data.dart';
-import 'package:own_the_city/utils/app_wrapper/app_main_wrapper.dart';
 import 'package:provider/provider.dart';
 
 class OwnTheCityApp extends StatelessWidget {
