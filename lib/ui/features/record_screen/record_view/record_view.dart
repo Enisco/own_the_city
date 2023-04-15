@@ -12,7 +12,7 @@ import 'package:own_the_city/ui/features/custom_nav_bar/page_index_class.dart';
 import 'package:own_the_city/ui/features/record_screen/record_controller/record_controller.dart';
 import 'package:own_the_city/ui/shared/custom_appbar.dart';
 import 'package:own_the_city/ui/shared/custom_button.dart';
-import 'package:own_the_city/ui/shared/custom_textfield.dart';
+import 'package:own_the_city/ui/shared/custom_textfield_sized.dart';
 import 'package:own_the_city/ui/shared/spacer.dart';
 import 'package:own_the_city/utils/app_constants/app_colors.dart';
 import 'package:own_the_city/utils/app_constants/app_key_strings.dart';
