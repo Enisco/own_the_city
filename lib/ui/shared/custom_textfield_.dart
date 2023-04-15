@@ -16,6 +16,7 @@ TextStyle hintTextStyles = const TextStyle(
 class CustomTextfield extends StatefulWidget {
   const CustomTextfield(
       {Key? key,
+      this.fillColor,
       this.labelText,
       this.hintText,
       this.textEditingController,
@@ -50,6 +51,7 @@ class CustomTextfield extends StatefulWidget {
       : super(key: key);
 
   final EdgeInsets? scrollPadding;
+  final Color? fillColor;
   final String? labelText;
   final String? prefixText;
   final String? initialValue;
@@ -96,21 +98,22 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       maxLength: widget.textMaxLength,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
-          labelText: widget.labelText,
-          hintText: widget.hintText,
-          fillColor: Colors.grey[50],
-          filled: true,
-          contentPadding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.amber, width: 1.0),
-          ),
-          labelStyle: labelTextStyles,
-          hintStyle: hintTextStyles,
-          counterText: ''),
+        labelText: widget.labelText,
+        hintText: widget.hintText,
+        fillColor: widget.fillColor ?? Colors.grey[50],
+        filled: true,
+        contentPadding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.amber, width: 1.0),
+        ),
+        labelStyle: labelTextStyles,
+        hintStyle: hintTextStyles,
+        counterText: '',
+      ),
     );
   }
 }

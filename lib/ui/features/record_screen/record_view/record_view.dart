@@ -208,7 +208,7 @@ class _RecordPageViewState extends State<RecordPageView> {
                                 ],
                               ),
                             ),
-                            CustomTextField(
+                            SizedCustomTextField(
                               topPadding: 14,
                               fillColor: AppColors.regularBlue,
                               textEditingController:
@@ -230,7 +230,7 @@ class _RecordPageViewState extends State<RecordPageView> {
                                 ],
                               ),
                             ),
-                            CustomTextField(
+                            SizedCustomTextField(
                               height: 120,
                               textEditingController:
                                   _controller.toponymDescriptionController,
